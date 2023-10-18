@@ -1,0 +1,35 @@
+{
+  "name": "@unipackage/filecoin",
+  "version": "0.1.0",
+  "description": "filecoin",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./dist;npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unipackage/filecoin.git"
+  },
+  "keywords": [
+    "filecoin",
+    "ts",
+    "js"
+  ],
+  "author": "waynewyang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unipackage/filecoin/issues"
+  },
+  "homepage": "https://github.com/unipackage/filecoin#readme",
+  "dependencies": {
+    "@types/node": "20.6.2",
+    "@unipackage/ddd": "^0.1.2",
+    "@unipackage/utils": "^0.1.1",
+    "mongoose": "^7.6.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
