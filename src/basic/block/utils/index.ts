@@ -1,15 +1,15 @@
-import { Tipset } from "../../tipset/types"
-import { BlockMessages } from "../../block/types"
-import { BlsMessage, Message } from "../../message/types"
+import { TipsetProperties } from "../../tipset/types"
+import { BlockMessagesProperties } from "../../block/types"
+import { BlsMessage, MessageProperties } from "../../message/types"
 
 export function BlockMessagesToMessages(
-    blockMessagesArray: BlockMessages[],
-    tipset: Tipset
-): Array<Message> {
+    blockMessagesArray: BlockMessagesProperties[],
+    tipset: TipsetProperties
+): Array<MessageProperties> {
     const blockCidsInTipset = new Set<string>(
         tipset.Cids.map((cid) => JSON.stringify(cid))
     )
-    const res: Array<Message> = []
+    const res: Array<MessageProperties> = []
     const messagesMap = new Map<string, BlsMessage>()
 
     for (const blockMessages of blockMessagesArray) {
@@ -31,15 +31,12 @@ export function BlockMessagesToMessages(
     }
 
     messagesMap.forEach((value) => {
-        res.push(
-            new Message({
-                id: value.CID,
-                Height: tipset.Height,
-                Replayed: false,
-                Msg: value,
-                MsgCid: value.CID,
-            }) as Message
-        )
+        res.push({
+            Height: tipset.Height,
+            Replayed: false,
+            Msg: value,
+            MsgCid: value.CID,
+        } as MessageProperties)
     })
 
     return res

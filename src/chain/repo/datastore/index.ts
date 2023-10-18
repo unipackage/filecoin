@@ -1,10 +1,13 @@
 import { DataStore } from "@unipackage/datastore"
-import { MessageProperties } from "../../../message/types"
-import { BlockMessagesProperties } from "../../../block/types"
-import { TipsetProperties } from "../../../tipset/types"
-import { MessageModel, MessageDocument } from "../../../message/model"
-import { BlockMessagesDocument, BlockMessagesModel } from "../../../block/model"
-import { TipsetDocument, TipsetModel } from "../../../tipset/model"
+import { MessageProperties } from "../../../basic/message/types"
+import { BlockMessagesProperties } from "../../../basic/block/types"
+import { TipsetProperties } from "../../../basic/tipset/types"
+import { MessageModel, MessageDocument } from "../../../basic/message/model"
+import {
+    BlockMessagesDocument,
+    BlockMessagesModel,
+} from "../../../basic/block/model"
+import { TipsetDocument, TipsetModel } from "../../../basic/tipset/model"
 import { MongooseDataStore } from "@unipackage/datastore"
 
 class ChainDatastore<

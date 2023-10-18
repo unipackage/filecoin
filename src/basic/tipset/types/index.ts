@@ -8,5 +8,4 @@ export interface TipsetProperties {
     Blocks: Array<Block>
 }
 
-export interface Tipset extends TipsetProperties {}
-export class Tipset extends Entity<Tipset> {}
+export class Tipset extends Entity<TipsetProperties> {}

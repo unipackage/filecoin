@@ -52,6 +52,5 @@ export interface MessageProperties {
     MsgRct?: MsgRct
     GasCost?: GasCost
 }
-export interface Message extends MessageProperties {}
 
-export class Message extends Entity<Message> {}
+export class Message extends Entity<MessageProperties> {}

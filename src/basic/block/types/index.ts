@@ -47,8 +47,6 @@ export interface BlockMessagesProperties {
     SecpkMessages: Array<SecpkMessage>
 }
 
-export interface Block extends BlockProperties {}
-export class Block extends Entity<Block> {}
+export class Block extends Entity<BlockProperties> {}
 
-export interface BlockMessages extends BlockMessagesProperties {}
-export class BlockMessages extends Entity<BlockMessages> {}
+export class BlockMessages extends Entity<BlockMessagesProperties> {}

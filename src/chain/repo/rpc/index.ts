@@ -5,10 +5,10 @@ import {
     RPC,
     FilecoinRPCEngine,
 } from "@unipackage/net"
-import { MessageProperties } from "../../../message/types"
-import { BlockMessagesProperties } from "../../../block/types"
-import { TipsetProperties } from "../../../tipset/types"
-import { Cid } from "../../../cid/types"
+import { MessageProperties } from "../../../basic/message/types"
+import { BlockMessagesProperties } from "../../../basic/block/types"
+import { TipsetProperties } from "../../../basic/tipset/types"
+import { Cid } from "../../../basic/cid/types"
 import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
 
 class ChainRPC extends RPC {}
