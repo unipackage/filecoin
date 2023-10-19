@@ -13,7 +13,8 @@ export {
     BlockMessagesProperties,
 } from "./basic/block/types"
 export { BlockMessagesDocument, BlockMessagesModel } from "./basic/block/model"
-export { Cid } from "./basic/cid/types"
+export { Cid, CidProperties } from "./basic/cid/types"
+export { Hash } from "./basic/hash/types"
 export {
     Message,
     MessageProperties,
