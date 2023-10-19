@@ -1,10 +1,19 @@
-import { FilecoinNumber } from "@glif/filecoin-number"
+import { FilecoinNumber, FilecoinDenomination } from "@glif/filecoin-number"
 import { EnhanceNumber } from "@unipackage/utils"
 import { Entity } from "@unipackage/ddd"
 
 export class Balance extends FilecoinNumber {
-    toEnhanceNumberFil(): EnhanceNumber {
-        return new EnhanceNumber(Number(this.toFil()))
+    toEnhanceNumberFil(denomination: FilecoinDenomination): EnhanceNumber {
+        switch (denomination) {
+            case "attofil":
+                return new EnhanceNumber(Number(this.toAttoFil()))
+            case "picofil":
+                return new EnhanceNumber(Number(this.toPicoFil()))
+            case "fil":
+                return new EnhanceNumber(Number(this.toFil()))
+            default:
+                return new EnhanceNumber(Number(this.toFil()))
+        }
     }
 }
 

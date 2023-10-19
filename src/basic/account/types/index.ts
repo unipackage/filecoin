@@ -1,52 +1,45 @@
-import { BigNumber } from "@glif/filecoin-number"
-import { Address } from "../../address/types"
+import { FilecoinDenomination } from "@glif/filecoin-number"
+import { Address } from "@glif/filecoin-address"
 import { Balance, MarketBalance } from "../../balance/types"
+import { Entity } from "@unipackage/ddd"
 
-export interface Account {
+export interface AccountProperties {
     Address: Address
     Balance: Balance
     Marketbalance: MarketBalance
 }
 
-export function CreateAccount(
-    address: Address,
-    balance: Balance,
-    Escrow: Balance,
-    Locked: Balance
-): Account {
-    return {
-        Address: address,
-        Balance: balance,
-        Marketbalance: new MarketBalance({
-            Escrow,
-            Locked,
-        }),
+export class Account extends Entity<AccountProperties> {
+    marketEscrowBalance(denomination: FilecoinDenomination): Balance {
+        return new Balance(
+            this.properties.Marketbalance.properties.Escrow,
+            denomination
+        )
     }
-}
+    marketLockedBalance(denomination: FilecoinDenomination): Balance {
+        return new Balance(
+            this.properties.Marketbalance.properties.Locked,
+            denomination
+        )
+    }
+    basicBalance(denomination: FilecoinDenomination): Balance {
+        return new Balance(this.properties.Balance, denomination)
+    }
 
-export function GetAccountTotalBalance(account: Account): Balance {
-    let totalBalance: Balance = new Balance(new BigNumber(0), "fil")
-    totalBalance = new Balance(totalBalance.plus(account.Balance), "fil")
-    totalBalance = new Balance(
-        totalBalance.plus(account.Marketbalance.properties.Escrow),
-        "fil"
-    )
-    totalBalance = new Balance(
-        totalBalance.plus(account.Marketbalance.properties.Locked),
-        "fil"
-    )
-    return totalBalance
-}
-
-export function GetAccountAvailableBalance(account: Account): Balance {
-    let availableBalance: Balance = new Balance(new BigNumber(0), "fil")
-    availableBalance = new Balance(
-        availableBalance.plus(account.Balance),
-        "fil"
-    )
-    availableBalance = new Balance(
-        availableBalance.plus(account.Marketbalance.properties.Escrow),
-        "fil"
-    )
-    return availableBalance
+    totalBalance(denomination: FilecoinDenomination): Balance {
+        return new Balance(
+            this.basicBalance(denomination)
+                .plus(this.marketEscrowBalance(denomination))
+                .plus(this.marketLockedBalance(denomination)),
+            denomination
+        )
+    }
+    availableBalance(denomination: FilecoinDenomination): Balance {
+        return new Balance(
+            this.basicBalance(denomination).plus(
+                this.marketEscrowBalance(denomination)
+            ),
+            denomination
+        )
+    }
 }

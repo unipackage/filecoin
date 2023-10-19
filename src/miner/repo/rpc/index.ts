@@ -5,6 +5,7 @@ import {
     RPCOptions,
     RPC,
 } from "@unipackage/net"
+import {} from "@glif/filecoin-address"
 import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
 import { TipsetProperties } from "../../../basic/tipset/types"
 import { Actor } from "../../../basic/actor/types"

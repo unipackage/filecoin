@@ -1,27 +1,45 @@
-import { Address as GlifAddress, newFromString } from "@glif/filecoin-address"
-
-export enum AddressType {
-    IdAddress,
-    Other,
-    Unknown,
-}
+import {
+    Address as GlifAddress,
+    Protocol,
+    CoinType,
+} from "@glif/filecoin-address"
+import { Result } from "@unipackage/utils"
 
 export class Address extends GlifAddress {
-    // @ts-ignore
-    address: string
-    // @ts-ignore
-    idAddress: string
-    constructor(address: string) {
-        super(newFromString(address).bytes)
-        super.protocol() === 0
-            ? (this.idAddress = super.toString())
-            : (this.address = super.toString())
+    private idAddress
+
+    constructor(bytes: Uint8Array | string, coinType?: CoinType) {
+        if (typeof bytes === "string") {
+            const encoder = new TextEncoder()
+            super(encoder.encode(bytes), coinType)
+        } else {
+            super(bytes, coinType)
+        }
+        this.idAddress = super.protocol() == Protocol.ID ? this.toString() : ""
     }
 
-    type() {
-        if (super.protocol() === 0) {
-            return AddressType.IdAddress
+    getIdAddress(): Result<string> {
+        return this.idAddress !== ""
+            ? {
+                  ok: true,
+                  data: this.idAddress,
+              }
+            : {
+                  ok: false,
+                  error: "IdAddress not setted",
+              }
+    }
+
+    setIdAddress(idAddress: string): Result<void> {
+        if (this.idAddress !== "") {
+            this.idAddress = idAddress
+            return {
+                ok: true,
+            }
         }
-        return AddressType.Other
+        return {
+            ok: false,
+            error: "Id Address is alreay setted! ",
+        }
     }
 }
