@@ -1,7 +1,7 @@
-import { MessageProperties } from "../../basic/message/types"
+import { Message } from "../../basic/message/types"
 
 export interface ReplayStrategy {
-    shouldReplay(message: MessageProperties): boolean
+    shouldReplay(message: Message): boolean
 }
 
 export interface ReplayStrategyOptions {
@@ -16,7 +16,7 @@ export class AddressesFilterReplayStrategy implements ReplayStrategy {
         this.addresses = addresses
     }
 
-    shouldReplay(message: MessageProperties): boolean {
+    shouldReplay(message: Message): boolean {
         return (
             this.addresses.includes(message.Msg.From) ||
             this.addresses.includes(message.Msg.To)
@@ -25,7 +25,7 @@ export class AddressesFilterReplayStrategy implements ReplayStrategy {
 }
 
 export class AllReplayStrategy implements ReplayStrategy {
-    shouldReplay(message: MessageProperties): boolean {
+    shouldReplay(message: Message): boolean {
         return true
     }
 }

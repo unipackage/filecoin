@@ -1,9 +1,9 @@
-import { TipsetProperties } from "../../basic/tipset/types"
-import { BlockMessagesProperties } from "../../basic/block/types"
-import { MessageProperties } from "../../basic/message/types"
+import { Tipset } from "../../basic/tipset/types"
+import { BlockMessages } from "../../basic/block/types"
+import { Message } from "../../basic/message/types"
 
-export interface ChainProperties {
-    tipset: TipsetProperties
-    blockMessagesArray: Array<BlockMessagesProperties>
-    messages: Array<MessageProperties>
+export interface Chain {
+    tipset: Tipset
+    blockMessagesArray: Array<BlockMessages>
+    messages: Array<Message>
 }

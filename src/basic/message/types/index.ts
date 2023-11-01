@@ -42,7 +42,7 @@ export interface GasCost {
     TotalCost: string
 }
 
-export interface MessageProperties {
+export interface Message {
     Height: number
     Replayed: boolean
 
@@ -53,4 +53,4 @@ export interface MessageProperties {
     GasCost?: GasCost
 }
 
-export class Message extends Entity<MessageProperties> {}
+export class Message extends Entity<Message> {}

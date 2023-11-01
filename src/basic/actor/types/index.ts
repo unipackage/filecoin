@@ -9,7 +9,7 @@ import {
     NetworkName,
 } from "@glif/filecoin-actor-utils"
 
-export interface ActorProperties {
+export interface Actor {
     Code: ActorCode
     Head: Cid
     Nonce: number
@@ -17,8 +17,8 @@ export interface ActorProperties {
     Address: Address
 }
 
-export class Actor extends Entity<ActorProperties> {
+export class Actor extends Entity<Actor> {
     getActorName(networkName: NetworkName): ActorName | null {
-        return glifgetActorName(this.properties.Code, networkName)
+        return glifgetActorName(this.Code, networkName)
     }
 }

@@ -1,6 +1,7 @@
 import { Result } from "@unipackage/utils"
-import { MessageProperties } from "../../basic/message/types"
-import { ChainProperties } from "../types"
+import { Message } from "../../basic/message/types"
+import { Tipset } from "../../basic/tipset/types"
+import { Chain } from "../types"
 import {
     BlockMongoDatastore,
     MessageMongoDatastore,
@@ -26,8 +27,8 @@ interface IChainService {
     GetChainInfoByHeight(
         height: number,
         replayStrategyOptions?: ReplayStrategyOptions
-    ): Promise<Result<ChainProperties>>
-    SaveChainInfo(chainInfo: ChainProperties): Promise<Result<void>>
+    ): Promise<Result<Chain>>
+    SaveChainInfo(chainInfo: Chain): Promise<Result<void>>
     GetAndSaveChainInfoByHeight(
         height: number,
         replayStrategyOptions?: ReplayStrategyOptions
@@ -54,12 +55,12 @@ export class ChainService implements IChainService {
     public async GetChainInfoByHeight(
         height: number,
         replayStrategyOptions?: ReplayStrategyOptions
-    ): Promise<Result<ChainProperties>> {
+    ): Promise<Result<Chain>> {
         try {
             const chainHeadRes = await this.rpc.ChainHead()
             if (!chainHeadRes.ok || !chainHeadRes.data)
                 return { ok: false, error: chainHeadRes.error }
-            const chainHead = chainHeadRes.data
+            const chainHead = new Tipset(chainHeadRes.data)
 
             const tipsetRes = await this.rpc.ChainGetTipSetByHeight(
                 height,
@@ -110,7 +111,7 @@ export class ChainService implements IChainService {
         }
     }
 
-    async SaveChainInfo(chainInfo: ChainProperties): Promise<Result<void>> {
+    async SaveChainInfo(chainInfo: Chain): Promise<Result<void>> {
         const errors: any[] = []
         let result: Result<void> = {
             ok: false,
@@ -128,7 +129,7 @@ export class ChainService implements IChainService {
 
             const msgDoResults = await Promise.all(
                 chainInfo.messages.map(
-                    async (message: MessageProperties) =>
+                    async (message: Message) =>
                         await this.messageDs.CreateOrupdateByUniqueIndexes(
                             message
                         )

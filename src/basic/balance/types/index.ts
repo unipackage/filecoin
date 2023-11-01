@@ -17,9 +17,9 @@ export class Balance extends FilecoinNumber {
     }
 }
 
-export interface MarketBalanceProperties {
+export interface MarketBalance {
     Escrow: Balance
     Locked: Balance
 }
 
-export class MarketBalance extends Entity<MarketBalanceProperties> {}
+export class MarketBalance extends Entity<MarketBalance> {}

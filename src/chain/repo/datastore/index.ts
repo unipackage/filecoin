@@ -1,7 +1,7 @@
 import { DataStore } from "@unipackage/datastore"
-import { MessageProperties } from "../../../basic/message/types"
-import { BlockMessagesProperties } from "../../../basic/block/types"
-import { TipsetProperties } from "../../../basic/tipset/types"
+import { Message } from "../../../basic/message/types"
+import { BlockMessages } from "../../../basic/block/types"
+import { Tipset } from "../../../basic/tipset/types"
 import { MessageModel, MessageDocument } from "../../../basic/message/model"
 import {
     BlockMessagesDocument,
@@ -9,74 +9,64 @@ import {
 } from "../../../basic/block/model"
 import { TipsetDocument, TipsetModel } from "../../../basic/tipset/model"
 import { MongooseDataStore } from "@unipackage/datastore"
+import { TypeFromProperties } from "@unipackage/utils"
 
-class ChainDatastore<
-    T extends MessageProperties | BlockMessagesProperties | TipsetProperties,
-    U
-> extends DataStore<T, U> {}
-
-export class MessageMongoDatastore extends ChainDatastore<
-    MessageProperties,
+export class MessageMongoDatastore extends DataStore<
+    TypeFromProperties<Message>,
     MessageDocument
 > {
     constructor(uri: string) {
         super(
-            new MongooseDataStore<MessageProperties, MessageDocument>(
+            new MongooseDataStore<TypeFromProperties<Message>, MessageDocument>(
                 MessageModel,
                 uri
             )
         )
     }
-    protected shouldUpdate(
-        existingData: MessageProperties,
-        newData: MessageProperties
-    ): boolean {
+    protected shouldUpdate(existingData: Message, newData: Message): boolean {
         if (existingData.Replayed === true) return false
         return super.shouldUpdate(existingData, newData, [
             "MsgCid",
             "Replayed",
-        ] as (keyof MessageProperties)[])
+        ] as (keyof TypeFromProperties<Message>)[])
     }
 }
-export class BlockMongoDatastore extends ChainDatastore<
-    BlockMessagesProperties,
+export class BlockMongoDatastore extends DataStore<
+    TypeFromProperties<BlockMessages>,
     BlockMessagesDocument
 > {
     constructor(uri: string) {
         super(
             new MongooseDataStore<
-                BlockMessagesProperties,
+                TypeFromProperties<BlockMessages>,
                 BlockMessagesDocument
             >(BlockMessagesModel, uri)
         )
     }
     protected shouldUpdate(
-        existingData: BlockMessagesProperties,
-        newData: BlockMessagesProperties
+        existingData: BlockMessages,
+        newData: BlockMessages
     ): boolean {
         return super.shouldUpdate(existingData, newData, [
             "BlockCid",
-        ] as (keyof BlockMessagesProperties)[])
+        ] as (keyof TypeFromProperties<BlockMessages>)[])
     }
 }
-export class TipsetMongoDatastore extends ChainDatastore<
-    TipsetProperties,
+export class TipsetMongoDatastore extends DataStore<
+    TypeFromProperties<Tipset>,
     TipsetDocument
 > {
     constructor(uri: string) {
         super(
-            new MongooseDataStore<TipsetProperties, TipsetDocument>(
+            new MongooseDataStore<TypeFromProperties<Tipset>, TipsetDocument>(
                 TipsetModel,
                 uri
             )
         )
     }
-    protected shouldUpdate(
-        existingData: TipsetProperties,
-        newData: TipsetProperties
-    ): boolean {
+    protected shouldUpdate(existingData: Tipset, newData: Tipset): boolean {
         return super.shouldUpdate(existingData, newData, [
             "Height",
-        ] as (keyof TipsetProperties)[])
+        ] as (keyof TypeFromProperties<Tipset>)[])
     }
 }

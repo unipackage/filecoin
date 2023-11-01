@@ -5,23 +5,19 @@ import {
     RPC,
     FilecoinRPCEngine,
 } from "@unipackage/net"
-import { MessageProperties } from "../../../basic/message/types"
-import { BlockMessagesProperties } from "../../../basic/block/types"
-import { TipsetProperties } from "../../../basic/tipset/types"
+import { Message } from "../../../basic/message/types"
+import { BlockMessages } from "../../../basic/block/types"
+import { Tipset } from "../../../basic/tipset/types"
 import { Cid } from "../../../basic/cid/types"
 import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
 
 class ChainRPC extends RPC {}
 
 interface ChainFilecoinOriginRPC {
-    ChainHead(): Promise<RPCResponse<TipsetProperties>>
-    ChainGetTipSetByHeight(
-        ...parmas: any[]
-    ): Promise<RPCResponse<TipsetProperties>>
-    ChainGetBlockMessages(
-        ...parmas: any[]
-    ): Promise<RPCResponse<BlockMessagesProperties>>
-    StateReplay(...parmas: any[]): Promise<RPCResponse<MessageProperties>>
+    ChainHead(): Promise<RPCResponse<Tipset>>
+    ChainGetTipSetByHeight(...parmas: any[]): Promise<RPCResponse<Tipset>>
+    ChainGetBlockMessages(...parmas: any[]): Promise<RPCResponse<BlockMessages>>
+    StateReplay(...parmas: any[]): Promise<RPCResponse<Message>>
 }
 
 @registerMethod([
@@ -38,37 +34,37 @@ class ChainFilecoinOriginRPC extends ChainRPC {
 
 export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
     public async ChainGetBlockMessages(
-        tipset: TipsetProperties,
+        tipset: Tipset,
         blockCid: Cid
-    ): Promise<RPCResponse<BlockMessagesProperties>> {
+    ): Promise<RPCResponse<BlockMessages>> {
         let res = await super.ChainGetBlockMessages(blockCid)
         if (res.ok && res.data) {
-            res.data = {
+            res.data = new BlockMessages({
                 ...res.data,
                 BlockCid: blockCid,
                 Height: tipset.Height,
-            }
+            })
         }
         return res
     }
 
     public async StateReplay(
-        tipset: TipsetProperties,
+        tipset: Tipset,
         msgCid: Cid
-    ): Promise<RPCResponse<MessageProperties>> {
+    ): Promise<RPCResponse<Message>> {
         let res = await super.StateReplay(tipset.Cids, msgCid, {
             resultRules: { acceptUndefined: true },
         })
         if (res.ok && res.data) {
             const { MsgCid, Msg, MsgRct, GasCost } = res.data
-            res.data = {
+            res.data = new Message({
                 Height: tipset.Height,
                 Replayed: true,
                 MsgCid,
                 Msg,
                 MsgRct,
                 GasCost,
-            } as MessageProperties
+            })
         }
         return res
     }

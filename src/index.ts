@@ -1,23 +1,13 @@
-export { Account, AccountProperties } from "./basic/account/types"
-export { Actor, ActorProperties } from "./basic/actor/types"
+export { Account } from "./basic/account/types"
+export { Actor } from "./basic/actor/types"
 export { Address } from "./basic/address/types"
-export {
-    Balance,
-    MarketBalance,
-    MarketBalanceProperties,
-} from "./basic/balance/types"
-export {
-    Block,
-    BlockProperties,
-    BlockMessages,
-    BlockMessagesProperties,
-} from "./basic/block/types"
+export { Balance, MarketBalance } from "./basic/balance/types"
+export { Block, BlockMessages } from "./basic/block/types"
 export { BlockMessagesDocument, BlockMessagesModel } from "./basic/block/model"
 export { Cid, CidProperties } from "./basic/cid/types"
 export { Hash } from "./basic/hash/types"
 export {
     Message,
-    MessageProperties,
     MsgRct,
     BlsMessage,
     SecpkMessage,
@@ -25,8 +15,8 @@ export {
 } from "./basic/message/types"
 export { MessageDocument, MessageModel } from "./basic/message/model"
 export { TipsetDocument, TipsetModel } from "./basic/tipset/model"
-export { Tipset, TipsetProperties } from "./basic/tipset/types"
-export { ChainProperties } from "./chain/types"
+export { Tipset } from "./basic/tipset/types"
+export { Chain } from "./chain/types"
 export {
     MessageMongoDatastore,
     BlockMongoDatastore,

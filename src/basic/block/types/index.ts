@@ -2,7 +2,7 @@ import { Cid } from "../../cid/types"
 import { BlsMessage, SecpkMessage } from "../../message/types"
 import { Entity } from "@unipackage/ddd"
 
-export interface BlockProperties {
+export interface Block {
     Miner: string
     Ticket: {
         VRFProof: string
@@ -38,7 +38,7 @@ export interface BlockProperties {
     ParentBaseFee: string
 }
 
-export interface BlockMessagesProperties {
+export interface BlockMessages {
     BlockCid: Cid
     Height?: number
 
@@ -47,6 +47,6 @@ export interface BlockMessagesProperties {
     SecpkMessages: Array<SecpkMessage>
 }
 
-export class Block extends Entity<BlockProperties> {}
+export class Block extends Entity<Block> {}
 
-export class BlockMessages extends Entity<BlockMessagesProperties> {}
+export class BlockMessages extends Entity<BlockMessages> {}

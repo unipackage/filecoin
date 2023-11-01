@@ -7,7 +7,7 @@ import {
 } from "@unipackage/net"
 import {} from "@glif/filecoin-address"
 import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
-import { TipsetProperties } from "../../../basic/tipset/types"
+import { Tipset } from "../../../basic/tipset/types"
 import { Actor } from "../../../basic/actor/types"
 import { Capacity, EnhanceNumber } from "@unipackage/utils"
 import { Balance, MarketBalance } from "../../../basic/balance/types"
@@ -19,7 +19,7 @@ import { BigNumber } from "@glif/filecoin-number"
 class ParticipantRPC extends RPC {}
 
 interface ParticipantFilecoinOriginRPC {
-    ChainHead(): Promise<RPCResponse<TipsetProperties>>
+    ChainHead(): Promise<RPCResponse<Tipset>>
 
     StateGetActor(
         param: string,

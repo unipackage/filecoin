@@ -1,17 +1,17 @@
 import { Result } from "@unipackage/utils"
-import { MessageProperties } from "../../basic/message/types"
+import { Message } from "../../basic/message/types"
 import { Cid } from "../../basic/cid/types"
-import { BlockMessagesProperties } from "../../basic/block/types"
-import { TipsetProperties } from "../../basic/tipset/types"
+import { BlockMessages } from "../../basic/block/types"
+import { Tipset } from "../../basic/tipset/types"
 import { ReplayStrategy, DefaultReplayStrategy } from "./replayStrategy"
 import { ChainFilecoinRPC } from "../repo/rpc"
 
 export async function GetBlockMessagesesByTipset(
     rpc: ChainFilecoinRPC,
-    tipset: TipsetProperties
-): Promise<Result<BlockMessagesProperties[]>> {
+    tipset: Tipset
+): Promise<Result<BlockMessages[]>> {
     const errors: any[] = []
-    const blockMessagesArray: BlockMessagesProperties[] = []
+    const blockMessagesArray: BlockMessages[] = []
 
     const blockMessagesArrayRes = await Promise.all(
         tipset.Cids.map(
@@ -41,14 +41,14 @@ export async function GetBlockMessagesesByTipset(
 
 export async function GetRepalyedMessagesByblockMessageses(
     rpc: ChainFilecoinRPC,
-    messages: MessageProperties[],
-    tipset: TipsetProperties,
+    messages: Message[],
+    tipset: Tipset,
     options?: {
         replay?: boolean
         replayStrategy?: ReplayStrategy
     }
-): Promise<Result<MessageProperties[]> | Result<undefined>> {
-    const filteredMessages: MessageProperties[] = []
+): Promise<Result<Message[]> | Result<undefined>> {
+    const filteredMessages: Message[] = []
     const errors: any[] = []
 
     options = {
@@ -57,7 +57,7 @@ export async function GetRepalyedMessagesByblockMessageses(
     }
 
     if (options.replay) {
-        const replayPromiseArray: Promise<Result<MessageProperties>>[] = []
+        const replayPromiseArray: Promise<Result<Message>>[] = []
 
         for (const message of messages) {
             if (
