@@ -13,6 +13,8 @@ export {
     SecpkMessage,
     GasCost,
 } from "./basic/message/types"
+export { ContractMessageDecoder } from "./basic/contractMessage/decoder"
+export { ContractMessage } from "./basic/contractMessage/types"
 export { MessageDocument, MessageModel } from "./basic/message/model"
 export { TipsetDocument, TipsetModel } from "./basic/tipset/model"
 export { Tipset } from "./basic/tipset/types"
