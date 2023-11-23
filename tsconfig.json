@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,
-    "target": "es5",
+    "target": "ES2015",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
