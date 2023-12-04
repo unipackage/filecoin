@@ -1,11 +1,11 @@
 import { Result } from "@unipackage/utils"
-import { EVM } from "@unipackage/net"
+import { IEVM } from "@unipackage/net"
 import { Message } from "../../message/types"
 import { ContractMessage } from "../types"
 
 export class ContractMessageDecoder {
-    private evm: EVM
-    constructor(evm: EVM) {
+    private evm: IEVM
+    constructor(evm: IEVM) {
         this.evm = evm
     }
 
