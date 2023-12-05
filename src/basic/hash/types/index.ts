@@ -16,12 +16,12 @@ export class Hash {
     }
 
     toCidV0(): Cid {
-        return new Cid(CID.createV0(digest.create(18, this.hash)).toJSON())
+        return new Cid(CID.createV0(digest.create(18, this.hash)).toString())
     }
 
     toCidV1(): Cid {
         return new Cid(
-            CID.createV1(json.code, digest.create(0x55, this.hash)).toJSON()
+            CID.createV1(json.code, digest.create(0x55, this.hash)).toString()
         )
     }
 

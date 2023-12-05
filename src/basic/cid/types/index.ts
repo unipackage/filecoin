@@ -1,15 +1,13 @@
-import { fromJSON, CID } from "multiformats/cid"
+import { CID } from "multiformats/cid"
+
 export interface ICidUtils {
     isCidEqual(sourceCid: Cid, targetCid: Cid): boolean
-}
-export interface CidProperties {
-    "/": string
 }
 
 export class Cid {
     private CID: CID
-    constructor(cid: CidProperties) {
-        this.CID = fromJSON(cid)
+    constructor(cid: string) {
+        this.CID = CID.parse(cid)
     }
 
     toHash(): Uint8Array {

@@ -1,6 +1,6 @@
 {
   "name": "@unipackage/filecoin",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "filecoin",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,7 @@
     "@unipackage/net": "^0.1.10",
     "@unipackage/utils": "^0.1.7",
     "mongoose": "^7.6.3",
-    "multiformats": "^12.1.2"
+    "multiformats": "^9.9.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2"
