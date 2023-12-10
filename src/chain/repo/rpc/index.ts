@@ -1,17 +1,8 @@
-import {
-    registerMethod,
-    RPCResponse,
-    RPCOptions,
-    RPC,
-    FilecoinRPCEngine,
-} from "@unipackage/net"
+import { withRequestMethod, RPCResponse, FilecoinRPC } from "@unipackage/net"
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
 import { Cid } from "../../../basic/cid/types"
-import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
-
-class ChainRPC extends RPC {}
 
 interface ChainFilecoinOriginRPC {
     ChainHead(): Promise<RPCResponse<Tipset>>
@@ -20,17 +11,13 @@ interface ChainFilecoinOriginRPC {
     StateReplay(...parmas: any[]): Promise<RPCResponse<Message>>
 }
 
-@registerMethod([
+@withRequestMethod([
     "ChainHead",
     "ChainGetTipSetByHeight",
     "ChainGetBlockMessages",
     "StateReplay",
 ])
-class ChainFilecoinOriginRPC extends ChainRPC {
-    constructor(config: LotusRpcEngineConfig, defaultOptions?: RPCOptions) {
-        super(new FilecoinRPCEngine(config, defaultOptions))
-    }
-}
+class ChainFilecoinOriginRPC extends FilecoinRPC {}
 
 export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
     public async ChainGetBlockMessages(

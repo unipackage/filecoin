@@ -1,9 +1,8 @@
 import {
-    FilecoinRPCEngine,
-    registerMethod,
+    FilecoinRPC,
+    withRequestMethod,
     RPCResponse,
     RPCOptions,
-    RPC,
 } from "@unipackage/net"
 import {} from "@glif/filecoin-address"
 import { LotusRpcEngineConfig } from "@glif/filecoin-rpc-client"
@@ -15,8 +14,6 @@ import { Cid } from "../../../basic/cid/types"
 import { Address } from "../../../basic/address/types"
 import { MinerInfo, MinerPower, Power } from "../../types"
 import { BigNumber } from "@glif/filecoin-number"
-
-class ParticipantRPC extends RPC {}
 
 interface ParticipantFilecoinOriginRPC {
     ChainHead(): Promise<RPCResponse<Tipset>>
@@ -49,7 +46,7 @@ interface ParticipantFilecoinOriginRPC {
     ): Promise<RPCResponse<any>>
 }
 
-@registerMethod([
+@withRequestMethod([
     "ChainHead",
     "WalletBalance",
     "StateMinerAvailableBalance",
@@ -59,11 +56,7 @@ interface ParticipantFilecoinOriginRPC {
     "StateMinerPower",
     "StateAccountKey",
 ])
-class ParticipantFilecoinOriginRPC extends RPC {
-    constructor(config: LotusRpcEngineConfig, defaultOptions?: RPCOptions) {
-        super(new FilecoinRPCEngine(config, defaultOptions))
-    }
-}
+class ParticipantFilecoinOriginRPC extends FilecoinRPC {}
 
 export class ParticipantFilecoinRPC extends ParticipantFilecoinOriginRPC {
     public async WalletBalance(param: string): Promise<RPCResponse<Balance>> {
