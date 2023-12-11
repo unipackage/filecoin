@@ -51,5 +51,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2023 [waynewyang](https://github.com/unipackage).<br />
+Copyright © 2023 [unipackage](https://github.com/unipackage).<br />
 This project is [MIT and APACHE](https://github.com/unipackage/filecoin/blob/master/LICENSE) licensed.
