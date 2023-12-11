@@ -1,6 +1,6 @@
 {
   "name": "@unipackage/filecoin",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "filecoin",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,7 @@
     "js"
   ],
   "author": "waynewyang",
-  "license":  "MIT and APACHE",
+  "license": "MIT and APACHE",
   "bugs": {
     "url": "https://github.com/unipackage/filecoin/issues"
   },
