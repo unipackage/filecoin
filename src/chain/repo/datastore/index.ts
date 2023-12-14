@@ -1,4 +1,4 @@
-import { DataStore } from "@unipackage/datastore"
+import { DataStore, DatabaseOptions } from "@unipackage/datastore"
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
@@ -15,11 +15,12 @@ export class MessageMongoDatastore extends DataStore<
     ValueFields<Message>,
     MessageDocument
 > {
-    constructor(uri: string) {
+    constructor(uri: string, options: DatabaseOptions) {
         super(
             new MongooseDataStore<ValueFields<Message>, MessageDocument>(
                 MessageModel,
-                uri
+                uri,
+                options
             )
         )
     }
@@ -35,12 +36,12 @@ export class BlockMongoDatastore extends DataStore<
     ValueFields<BlockMessages>,
     BlockMessagesDocument
 > {
-    constructor(uri: string) {
+    constructor(uri: string, options: DatabaseOptions) {
         super(
             new MongooseDataStore<
                 ValueFields<BlockMessages>,
                 BlockMessagesDocument
-            >(BlockMessagesModel, uri)
+            >(BlockMessagesModel, uri, options)
         )
     }
     protected shouldUpdate(
@@ -56,11 +57,12 @@ export class TipsetMongoDatastore extends DataStore<
     ValueFields<Tipset>,
     TipsetDocument
 > {
-    constructor(uri: string) {
+    constructor(uri: string, options: DatabaseOptions) {
         super(
             new MongooseDataStore<ValueFields<Tipset>, TipsetDocument>(
                 TipsetModel,
-                uri
+                uri,
+                options
             )
         )
     }

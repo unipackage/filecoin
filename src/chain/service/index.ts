@@ -97,11 +97,11 @@ export class ChainService implements IChainService {
 
             return {
                 ok: true,
-                data: {
+                data: new Chain({
                     tipset,
                     blockMessagesArray,
                     messages,
-                },
+                }),
             }
         } catch (error) {
             return {
