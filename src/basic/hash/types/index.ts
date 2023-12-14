@@ -19,9 +19,9 @@
  ********************************************************************************/
 
 import { Cid } from "../../cid/types"
-import { digest } from "multiformats/basics"
+// import { digest } from "multiformats/basics"
 import { CID } from "multiformats/cid"
-import * as json from "multiformats/codecs/json"
+// import * as json from "multiformats/codecs/json"
 
 /**
  * Class representing a hash.
@@ -47,7 +47,8 @@ export class Hash {
      * @returns The CID version 0 representation of the hash.
      */
     toCidV0(): Cid {
-        return new Cid(CID.createV0(digest.create(18, this.hash)).toString())
+        // return new Cid(CID.createV0(digest.create(18, this.hash)).toString())
+        return new Cid("")
     }
 
     /**
@@ -56,7 +57,8 @@ export class Hash {
      */
     toCidV1(): Cid {
         return new Cid(
-            CID.createV1(json.code, digest.create(0x55, this.hash)).toString()
+            // CID.createV1(json.code, digest.create(0x55, this.hash)).toString()
+            ""
         )
     }
 
