@@ -1,3 +1,23 @@
+/*******************************************************************************
+ *   (c) 2023 unipackage
+ *
+ *  Licensed under either the MIT License (the "MIT License") or the Apache License, Version 2.0
+ *  (the "Apache License"). You may not use this file except in compliance with one of these
+ *  licenses. You may obtain a copy of the MIT License at
+ *
+ *      https://opensource.org/licenses/MIT
+ *
+ *  Or the Apache License, Version 2.0 at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the MIT License or the Apache License for the specific language governing permissions and
+ *  limitations under the respective licenses.
+ ********************************************************************************/
+
 import { Result } from "@unipackage/utils"
 import { Message } from "../../basic/message/types"
 import { Cid } from "../../basic/cid/types"
@@ -6,6 +26,12 @@ import { Tipset } from "../../basic/tipset/types"
 import { ReplayStrategy, DefaultReplayStrategy } from "./replayStrategy"
 import { ChainFilecoinRPC } from "../repo/rpc"
 
+/**
+ * Retrieves block messages for each block in a tipset.
+ * @param rpc - The ChainFilecoinRPC instance to use for retrieving block messages.
+ * @param tipset - The tipset for which to fetch block messages.
+ * @returns A Promise that resolves to a Result containing the array of BlockMessages or an error.
+ */
 export async function GetBlockMessagesesByTipset(
     rpc: ChainFilecoinRPC,
     tipset: Tipset
@@ -39,6 +65,14 @@ export async function GetBlockMessagesesByTipset(
     }
 }
 
+/**
+ * Retrieves replayed messages based on the provided options and strategy.
+ * @param rpc - The ChainFilecoinRPC instance to use for replaying messages.
+ * @param messages - The array of messages to process.
+ * @param tipset - The tipset associated with the messages.
+ * @param options - Options for replaying messages, including a replay flag and replay strategy.
+ * @returns A Promise that resolves to a Result containing the array of replayed messages or an error.
+ */
 export async function GetRepalyedMessagesByblockMessageses(
     rpc: ChainFilecoinRPC,
     messages: Message[],
@@ -74,7 +108,7 @@ export async function GetRepalyedMessagesByblockMessageses(
 
         for (const relayMessage of replayRes) {
             if (relayMessage.ok) {
-                //because StateReplay accecpt undefined result
+                // because StateReplay accepts undefined result
                 relayMessage.data && filteredMessages.push(relayMessage.data)
             } else {
                 errors.push(relayMessage.error)
