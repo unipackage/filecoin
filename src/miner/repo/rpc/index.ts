@@ -1,5 +1,5 @@
 import {
-    FilecoinRPC,
+    FilecoinRPCEngine,
     withRequestMethod,
     RPCResponse,
     RPCOptions,
@@ -56,7 +56,7 @@ interface ParticipantFilecoinOriginRPC {
     "StateMinerPower",
     "StateAccountKey",
 ])
-class ParticipantFilecoinOriginRPC extends FilecoinRPC {}
+class ParticipantFilecoinOriginRPC extends FilecoinRPCEngine {}
 
 export class ParticipantFilecoinRPC extends ParticipantFilecoinOriginRPC {
     public async WalletBalance(param: string): Promise<RPCResponse<Balance>> {

@@ -1,9 +1,9 @@
 import { FilecoinDenomination } from "@glif/filecoin-number"
 import { Address } from "@glif/filecoin-address"
 import { Balance, MarketBalance } from "../../balance/types"
-import { Entity, EntityInterface } from "@unipackage/ddd"
+import { Entity } from "@unipackage/ddd"
 
-export interface Account extends EntityInterface {
+export interface Account {
     Address: Address
     Balance: Balance
     Marketbalance: MarketBalance

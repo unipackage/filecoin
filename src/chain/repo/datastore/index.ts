@@ -9,15 +9,15 @@ import {
 } from "../../../basic/block/model"
 import { TipsetDocument, TipsetModel } from "../../../basic/tipset/model"
 import { MongooseDataStore } from "@unipackage/datastore"
-import { TypeFromProperties } from "@unipackage/utils"
+import { ValueFields } from "@unipackage/utils"
 
 export class MessageMongoDatastore extends DataStore<
-    TypeFromProperties<Message>,
+    ValueFields<Message>,
     MessageDocument
 > {
     constructor(uri: string) {
         super(
-            new MongooseDataStore<TypeFromProperties<Message>, MessageDocument>(
+            new MongooseDataStore<ValueFields<Message>, MessageDocument>(
                 MessageModel,
                 uri
             )
@@ -28,17 +28,17 @@ export class MessageMongoDatastore extends DataStore<
         return super.shouldUpdate(existingData, newData, [
             "MsgCid",
             "Replayed",
-        ] as (keyof TypeFromProperties<Message>)[])
+        ] as (keyof ValueFields<Message>)[])
     }
 }
 export class BlockMongoDatastore extends DataStore<
-    TypeFromProperties<BlockMessages>,
+    ValueFields<BlockMessages>,
     BlockMessagesDocument
 > {
     constructor(uri: string) {
         super(
             new MongooseDataStore<
-                TypeFromProperties<BlockMessages>,
+                ValueFields<BlockMessages>,
                 BlockMessagesDocument
             >(BlockMessagesModel, uri)
         )
@@ -49,16 +49,16 @@ export class BlockMongoDatastore extends DataStore<
     ): boolean {
         return super.shouldUpdate(existingData, newData, [
             "BlockCid",
-        ] as (keyof TypeFromProperties<BlockMessages>)[])
+        ] as (keyof ValueFields<BlockMessages>)[])
     }
 }
 export class TipsetMongoDatastore extends DataStore<
-    TypeFromProperties<Tipset>,
+    ValueFields<Tipset>,
     TipsetDocument
 > {
     constructor(uri: string) {
         super(
-            new MongooseDataStore<TypeFromProperties<Tipset>, TipsetDocument>(
+            new MongooseDataStore<ValueFields<Tipset>, TipsetDocument>(
                 TipsetModel,
                 uri
             )
@@ -67,6 +67,6 @@ export class TipsetMongoDatastore extends DataStore<
     protected shouldUpdate(existingData: Tipset, newData: Tipset): boolean {
         return super.shouldUpdate(existingData, newData, [
             "Height",
-        ] as (keyof TypeFromProperties<Tipset>)[])
+        ] as (keyof ValueFields<Tipset>)[])
     }
 }

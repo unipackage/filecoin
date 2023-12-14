@@ -1,4 +1,9 @@
-import { withRequestMethod, RPCResponse, FilecoinRPC } from "@unipackage/net"
+import {
+    withRequestMethod,
+    RPCResponse,
+    Rpc,
+    FilecoinRPCEngine,
+} from "@unipackage/net"
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
@@ -17,7 +22,7 @@ interface ChainFilecoinOriginRPC {
     "ChainGetBlockMessages",
     "StateReplay",
 ])
-class ChainFilecoinOriginRPC extends FilecoinRPC {}
+class ChainFilecoinOriginRPC extends FilecoinRPCEngine {}
 
 export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
     public async ChainGetBlockMessages(

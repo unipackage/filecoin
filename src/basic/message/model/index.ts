@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose"
 import { Message } from "../types"
-import { TypeFromProperties } from "@unipackage/utils"
+import { ValueFields } from "@unipackage/utils"
 
-interface MessageDocument extends TypeFromProperties<Message>, Document {}
+interface MessageDocument extends ValueFields<Message>, Document {}
 
 const MessageSchema = new Schema<MessageDocument>({
     MsgCid: {

@@ -1,10 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose"
 import { BlockMessages } from "../types"
-import { TypeFromProperties } from "@unipackage/utils"
+import { ValueFields } from "@unipackage/utils"
 
-interface BlockMessagesDocument
-    extends TypeFromProperties<BlockMessages>,
-        Document {}
+interface BlockMessagesDocument extends ValueFields<BlockMessages>, Document {}
 
 const BlockMessagesSchema = new Schema<BlockMessagesDocument>({
     BlockCid: {

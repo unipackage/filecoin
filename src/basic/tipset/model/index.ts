@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose"
 import { Tipset } from "../types"
-import { TypeFromProperties } from "@unipackage/utils"
+import { ValueFields } from "@unipackage/utils"
 
-interface TipsetDocument extends TypeFromProperties<Tipset>, Document {}
+interface TipsetDocument extends ValueFields<Tipset>, Document {}
 
 const TipsetSchema = new Schema<TipsetDocument>({
     Height: {
