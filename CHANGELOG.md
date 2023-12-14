@@ -1,5 +1,12 @@
 
 
+## [0.1.16](https://github.com/unipackage/filecoin/compare/v0.1.15...v0.1.16) (2023-12-14)
+
+
+### Bug Fixes
+
+* 🐛 mutiformats version ([00a87e4](https://github.com/unipackage/filecoin/commit/00a87e4b98724157546fe7c53d96a6527141d0f1))
+
 ## [0.1.15](https://github.com/unipackage/filecoin/compare/v0.1.14...v0.1.15) (2023-12-14)
 
 
