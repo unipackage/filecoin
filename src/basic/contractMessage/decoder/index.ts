@@ -10,9 +10,7 @@ export class ContractMessageDecoder {
     }
 
     decode(msg: Message): Result<ContractMessage> {
-        //@ts-ignore
-        //TODO
-        const decodeInputRes = this.evm.decodeTxInput(msg.Msg.Params)
+        const decodeInputRes = this.evm.decodeTxInputToEvmInput(msg.Msg.Params)
         if (!decodeInputRes.ok && !decodeInputRes.data) {
             return { ok: false, error: decodeInputRes.error }
         }
