@@ -1,5 +1,12 @@
 
 
+# [0.2.0](https://github.com/unipackage/filecoin/compare/v0.1.16...v0.2.0) (2023-12-14)
+
+
+### Features
+
+* 🎸 delete cid and hash firstly ([e479839](https://github.com/unipackage/filecoin/commit/e479839d2aef9c692cde6b6c87334917c651d615))
+
 ## [0.1.16](https://github.com/unipackage/filecoin/compare/v0.1.15...v0.1.16) (2023-12-14)
 
 
