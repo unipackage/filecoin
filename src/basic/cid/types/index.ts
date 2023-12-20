@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-//import { CID } from "multiformats/cid"
+import { CID } from "multiformats/cid"
 
 /**
  * Interface for CID utility functions.
@@ -30,14 +30,14 @@ export interface ICidUtils {
      * @param targetCid - Target CID to compare.
      * @returns True if the CIDs are equal, false otherwise.
      */
-    isCidEqual(sourceCid: string, targetCid: string): boolean
+    isCidEqual(sourceCid: CID, targetCid: CID): boolean
 }
 
 /**
  * Wrapper class for CID functionality.
  */
 export class Cid {
-    private CID: string
+    private CID: CID
 
     /**
      * Creates an instance of the Cid class.
@@ -45,8 +45,7 @@ export class Cid {
      */
     constructor(cid: string) {
         // Parse the string representation of CID and store it
-        //this.CID = CID.parse(cid)
-        this.CID = cid
+        this.CID = CID.parse(cid)
     }
 
     /**
@@ -54,7 +53,6 @@ export class Cid {
      * @returns Uint8Array representing the hash of the CID.
      */
     toHash(): Uint8Array {
-        // return this.CID.multihash.digest
-        return new Uint8Array()
+        return this.CID.multihash.digest
     }
 }
