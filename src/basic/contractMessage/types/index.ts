@@ -19,6 +19,7 @@
  ********************************************************************************/
 
 import { Cid } from "../../cid/types"
+import { Entity } from "@unipackage/ddd"
 
 /**
  * Interface representing a ContractMessage.
@@ -41,3 +42,8 @@ export interface ContractMessage {
     /** Status code indicating the result of the contract message execution. */
     status: number
 }
+
+/**
+ * class representing a ContractMessage.
+ */
+export class ContractMessage extends Entity<ContractMessage> {}

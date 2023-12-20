@@ -57,7 +57,7 @@ export class ContractMessageDecoder {
         }
 
         // Create a ContractMessage with decoded information
-        const dsmsg: ContractMessage = {
+        const dsmsg: ContractMessage = new ContractMessage({
             cid: msg.MsgCid,
             height: msg.Height,
             timestamp: "", // Add timestamp logic here if available
@@ -66,7 +66,7 @@ export class ContractMessageDecoder {
             method: decodeInputRes.data.method,
             params: decodeInputRes.data.params,
             status: msg.MsgRct.ExitCode,
-        }
+        })
 
         // Return the result with the ContractMessage
         return {

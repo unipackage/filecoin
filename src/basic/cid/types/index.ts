@@ -21,23 +21,10 @@
 import { CID } from "multiformats/cid"
 
 /**
- * Interface for CID utility functions.
- */
-export interface ICidUtils {
-    /**
-     * Checks if two CIDs are equal.
-     * @param sourceCid - Source CID to compare.
-     * @param targetCid - Target CID to compare.
-     * @returns True if the CIDs are equal, false otherwise.
-     */
-    isCidEqual(sourceCid: CID, targetCid: CID): boolean
-}
-
-/**
  * Wrapper class for CID functionality.
  */
 export class Cid {
-    private CID: CID
+    CID: CID
 
     /**
      * Creates an instance of the Cid class.
