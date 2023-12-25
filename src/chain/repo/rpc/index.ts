@@ -26,7 +26,7 @@ import {
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
-import { Cid } from "../../../basic/cid/types"
+import { CidProperty } from "../../../basic/cid/types"
 
 /**
  * Interface representing the RPC methods for the Filecoin chain.
@@ -61,7 +61,7 @@ export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
      */
     public async ChainGetBlockMessages(
         tipset: Tipset,
-        blockCid: Cid
+        blockCid: CidProperty
     ): Promise<RPCResponse<BlockMessages>> {
         let res = await super.ChainGetBlockMessages(blockCid)
         if (res.ok && res.data) {
@@ -82,7 +82,7 @@ export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
      */
     public async StateReplay(
         tipset: Tipset,
-        msgCid: Cid
+        msgCid: CidProperty
     ): Promise<RPCResponse<Message>> {
         let res = await super.StateReplay(tipset.Cids, msgCid, {
             resultRules: { acceptUndefined: true },

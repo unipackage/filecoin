@@ -21,6 +21,10 @@
 import { CID } from "multiformats/cid"
 import { Hash } from "../../hash/types"
 
+export interface CidProperty {
+    "/": string
+}
+
 /**
  * Wrapper class for CID functionality.
  */
@@ -31,9 +35,13 @@ export class Cid {
      * Creates an instance of the Cid class.
      * @param cid - String representation of the CID.
      */
-    constructor(cid: string) {
+    constructor(cid: string | CidProperty) {
         // Parse the string representation of CID and store it
-        this.CID = CID.parse(cid)
+        if (typeof cid === "string") {
+            this.CID = CID.parse(cid)
+        } else {
+            this.CID = CID.parse(cid["/"])
+        }
     }
 
     /**

@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { Cid } from "../../cid/types"
+import { CidProperty } from "../../cid/types"
 import { BlsMessage, SecpkMessage } from "../../message/types"
 import { Entity } from "@unipackage/ddd"
 
@@ -40,12 +40,12 @@ export interface Block {
         PoStProof: number
         ProofBytes: string
     }>
-    Parents: Array<Cid>
+    Parents: Array<CidProperty>
     ParentWeight: string
     Height: number
-    ParentStateRoot: Cid
-    ParentMessageReceipts: Cid
-    Messages: Cid
+    ParentStateRoot: CidProperty
+    ParentMessageReceipts: CidProperty
+    Messages: CidProperty
     BLSAggregate: {
         Type: number
         Data: string
@@ -61,9 +61,9 @@ export interface Block {
 
 // Define the interface for BlockMessages
 export interface BlockMessages {
-    BlockCid: Cid
+    BlockCid: CidProperty
     Height?: number
-    Cids: Array<Cid>
+    Cids: Array<CidProperty>
     BlsMessages: Array<BlsMessage>
     SecpkMessages: Array<SecpkMessage>
 }

@@ -20,7 +20,7 @@
 
 import { Result } from "@unipackage/utils"
 import { Message } from "../../basic/message/types"
-import { Cid } from "../../basic/cid/types"
+import { CidProperty } from "../../basic/cid/types"
 import { BlockMessages } from "../../basic/block/types"
 import { Tipset } from "../../basic/tipset/types"
 import { ReplayStrategy, DefaultReplayStrategy } from "./replayStrategy"
@@ -41,7 +41,7 @@ export async function GetBlockMessagesesByTipset(
 
     const blockMessagesArrayRes = await Promise.all(
         tipset.Cids.map(
-            async (blockCid: Cid) =>
+            async (blockCid: CidProperty) =>
                 await rpc.ChainGetBlockMessages(tipset, blockCid)
         )
     )

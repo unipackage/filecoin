@@ -18,16 +18,20 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { CidProperty } from "../../cid/types"
-import { Block } from "../../block/types"
-import { Entity } from "@unipackage/ddd"
+import { expect } from "chai"
+import "mocha"
+import { Tipset } from "../../src/basic/tipset/types" // Replace with the actual path to your TypeScript file
 
-// Tipset interface representing the structure of a Tipset
-export interface Tipset {
-    Height: number
-    Cids: Array<CidProperty>
-    Blocks: Array<Block>
-}
+describe("Tipset Entity", () => {
+    it("should create a valid Tipset entity", () => {
+        const tipsetData = new Tipset({
+            Height: 1,
+            Cids: [],
+            Blocks: [],
+        })
 
-// Tipset class extending Entity, representing a Tipset with additional functionality
-export class Tipset extends Entity<Tipset> {}
+        const tipsetEntity = new Tipset(tipsetData)
+
+        expect(tipsetEntity).to.be.an.instanceOf(Tipset)
+    })
+})

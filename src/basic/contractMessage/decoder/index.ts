@@ -22,6 +22,7 @@ import { Result } from "@unipackage/utils"
 import { IEVM } from "@unipackage/net"
 import { Message } from "../../message/types"
 import { ContractMessage } from "../types"
+import { Cid } from "../../cid/types"
 
 /**
  * ContractMessageDecoder class for decoding contract messages.
@@ -58,7 +59,7 @@ export class ContractMessageDecoder {
 
         // Create a ContractMessage with decoded information
         const dsmsg: ContractMessage = new ContractMessage({
-            cid: msg.MsgCid,
+            cid: new Cid(msg.MsgCid),
             height: msg.Height,
             timestamp: "", // Add timestamp logic here if available
             from: msg.Msg.From,

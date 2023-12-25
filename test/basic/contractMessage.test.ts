@@ -18,16 +18,28 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { CidProperty } from "../../cid/types"
-import { Block } from "../../block/types"
-import { Entity } from "@unipackage/ddd"
+import { expect } from "chai"
+import "mocha"
+import { ContractMessage } from "../../src/basic/contractMessage/types" // Replace with the actual path to your TypeScript file
+import { Cid } from "../../src/basic/cid/types"
 
-// Tipset interface representing the structure of a Tipset
-export interface Tipset {
-    Height: number
-    Cids: Array<CidProperty>
-    Blocks: Array<Block>
-}
+describe("ContractMessage Entity", () => {
+    it("should create a valid ContractMessage entity", () => {
+        const contractMessageData = new ContractMessage({
+            cid: {} as Cid,
+            height: 1,
+            timestamp: "2023-01-01T12:00:00Z",
+            from: "senderAddress",
+            to: "recipientAddress",
+            method: "transfer",
+            params: {
+                /* Add parameter properties */
+            },
+            status: 0,
+        })
 
-// Tipset class extending Entity, representing a Tipset with additional functionality
-export class Tipset extends Entity<Tipset> {}
+        const contractMessageEntity = new ContractMessage(contractMessageData)
+
+        expect(contractMessageEntity).to.be.an.instanceOf(ContractMessage)
+    })
+})

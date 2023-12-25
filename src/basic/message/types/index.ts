@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { Cid } from "../../cid/types"
+import { CidProperty } from "../../cid/types"
 import { Entity } from "@unipackage/ddd"
 
 // BlsMessage interface representing a BLS signature message
@@ -33,7 +33,7 @@ export interface BlsMessage {
     GasPremium: string
     Method: number
     Params: string
-    CID: Cid
+    CID: CidProperty
 }
 
 // SecpkMessage interface representing a secpk signature message
@@ -43,7 +43,7 @@ export interface SecpkMessage {
         Type: number
         Data: string
     }
-    CID: Cid
+    CID: CidProperty
 }
 
 // MsgRct interface representing the receipt of a message
@@ -56,7 +56,7 @@ export interface MsgRct {
 
 // GasCost interface representing the gas cost associated with a message
 export interface GasCost {
-    Message: Cid
+    Message: CidProperty
     GasUsed: string
     BaseFeeBurn: string
     OverEstimationBurn: string
@@ -71,7 +71,7 @@ export interface Message {
     Height: number
     Replayed: boolean
 
-    MsgCid: Cid
+    MsgCid: CidProperty
     Msg: BlsMessage
 
     MsgRct?: MsgRct
