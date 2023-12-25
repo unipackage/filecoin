@@ -38,7 +38,7 @@ export class MessageMongoDatastore extends DataStore<
     ValueFields<Message>,
     MessageDocument
 > {
-    constructor(uri: string, options: DatabaseOptions) {
+    constructor(uri: string, options?: DatabaseOptions) {
         super(
             new MongooseDataStore<ValueFields<Message>, MessageDocument>(
                 MessageModel,
@@ -67,7 +67,7 @@ export class BlockMongoDatastore extends DataStore<
     ValueFields<BlockMessages>,
     BlockMessagesDocument
 > {
-    constructor(uri: string, options: DatabaseOptions) {
+    constructor(uri: string, options?: DatabaseOptions) {
         super(
             new MongooseDataStore<
                 ValueFields<BlockMessages>,
@@ -94,7 +94,7 @@ export class TipsetMongoDatastore extends DataStore<
     ValueFields<Tipset>,
     TipsetDocument
 > {
-    constructor(uri: string, options: DatabaseOptions) {
+    constructor(uri: string, options?: DatabaseOptions) {
         super(
             new MongooseDataStore<ValueFields<Tipset>, TipsetDocument>(
                 TipsetModel,

@@ -19,8 +19,6 @@
  ********************************************************************************/
 
 import { Result } from "@unipackage/utils"
-import { Message } from "../../basic/message/types"
-import { Tipset } from "../../basic/tipset/types"
 import { Chain } from "../types"
 import {
     BlockMongoDatastore,
@@ -30,12 +28,12 @@ import {
 import { ChainFilecoinRPC } from "../repo/rpc"
 import {
     GetBlockMessagesesByTipset,
-    GetRepalyedMessagesByblockMessageses,
-} from "./utils"
-import { BlockMessagesToMessages } from "../../basic/block/utils"
-import { ReplayStrategyOptions } from "./replayStrategy"
+    GetRepalyedMessages,
+} from "../../shared/utils"
+import { BlockMessagesToMessages } from "../../shared/blockMsgsToMsgs"
+import { ReplayStrategyOptions } from "../../shared/replayStrategy"
 
-interface IChainServiceOptions {
+export interface ChainServiceOptions {
     rpc: ChainFilecoinRPC
     messageDs: MessageMongoDatastore
     blockMessagesDs: BlockMongoDatastore
@@ -43,12 +41,12 @@ interface IChainServiceOptions {
     replayStrategyOptions?: ReplayStrategyOptions
 }
 
-interface IChainService {
+export interface ChainService {
     GetChainInfoByHeight(
         height: number,
         replayStrategyOptions?: ReplayStrategyOptions
     ): Promise<Result<Chain>>
-    SaveChainInfo(chainInfo: Chain): Promise<Result<void>>
+    SaveChainInfo(chain: Chain): Promise<Result<void>>
     GetAndSaveChainInfoByHeight(
         height: number,
         replayStrategyOptions?: ReplayStrategyOptions
@@ -58,14 +56,14 @@ interface IChainService {
 /**
  * Implementation of the chain service providing methods to retrieve, save, and process chain information.
  */
-export class ChainService implements IChainService {
+export class ChainService implements ChainService {
     private rpc: ChainFilecoinRPC
     private messageDs: MessageMongoDatastore
     private blockMessagesDs: BlockMongoDatastore
     private tipsetDs: TipsetMongoDatastore
     private replayStrategyOptions: ReplayStrategyOptions
 
-    constructor(options: IChainServiceOptions) {
+    constructor(options: ChainServiceOptions) {
         this.rpc = options.rpc
         this.messageDs = options.messageDs
         this.blockMessagesDs = options.blockMessagesDs
@@ -90,7 +88,7 @@ export class ChainService implements IChainService {
             const chainHeadRes = await this.rpc.ChainHead()
             if (!chainHeadRes.ok || !chainHeadRes.data)
                 return { ok: false, error: chainHeadRes.error }
-            const chainHead = new Tipset(chainHeadRes.data)
+            const chainHead = chainHeadRes.data
 
             // Retrieve the tipset at the specified height.
             const tipsetRes = await this.rpc.ChainGetTipSetByHeight(
@@ -117,15 +115,14 @@ export class ChainService implements IChainService {
             )
 
             // Replay messages based on the specified strategy options.
-            const replayedMessagesRes =
-                await GetRepalyedMessagesByblockMessageses(
-                    this.rpc,
-                    unreplayMessages,
-                    tipset,
-                    replayStrategyOptions
-                        ? replayStrategyOptions
-                        : this.replayStrategyOptions
-                )
+            const replayedMessagesRes = await GetRepalyedMessages(
+                this.rpc,
+                unreplayMessages,
+                tipset,
+                replayStrategyOptions
+                    ? replayStrategyOptions
+                    : this.replayStrategyOptions
+            )
             if (!replayedMessagesRes.ok || !replayedMessagesRes.data)
                 return { ok: false, error: replayedMessagesRes.error }
             const messages = replayedMessagesRes.data
@@ -152,7 +149,7 @@ export class ChainService implements IChainService {
      * @param chainInfo - The chain information to be saved.
      * @returns A promise resolving to the result of the save operation.
      */
-    async SaveChainInfo(chainInfo: Chain): Promise<Result<void>> {
+    async SaveChainInfo(chain: Chain): Promise<Result<void>> {
         const errors: any[] = []
         let result: Result<void> = {
             ok: false,
@@ -170,8 +167,8 @@ export class ChainService implements IChainService {
 
             // Save messages to the data store.
             const msgDoResults = await Promise.all(
-                chainInfo.messages.map(
-                    async (message: Message) =>
+                chain.messages.map(
+                    async (message) =>
                         await this.messageDs.CreateOrupdateByUniqueIndexes(
                             message
                         )
@@ -184,7 +181,7 @@ export class ChainService implements IChainService {
 
             // Save block messages to the data store.
             const blcokMessagesDoResults = await Promise.all(
-                chainInfo.blockMessagesArray.map(
+                chain.blockMessagesArray.map(
                     async (blockMessages) =>
                         await this.blockMessagesDs.CreateOrupdateByUniqueIndexes(
                             blockMessages
@@ -199,9 +196,7 @@ export class ChainService implements IChainService {
 
             // Save tipset to the data store.
             const tipsetDoResult =
-                await this.tipsetDs.CreateOrupdateByUniqueIndexes(
-                    chainInfo.tipset
-                )
+                await this.tipsetDs.CreateOrupdateByUniqueIndexes(chain.tipset)
             if (!tipsetDoResult.ok)
                 return { ok: false, error: tipsetDoResult.error }
 

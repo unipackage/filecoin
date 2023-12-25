@@ -19,12 +19,12 @@
  ********************************************************************************/
 
 import { Result } from "@unipackage/utils"
-import { Message } from "../../basic/message/types"
-import { CidProperty } from "../../basic/cid/types"
-import { BlockMessages } from "../../basic/block/types"
-import { Tipset } from "../../basic/tipset/types"
+import { Message } from "../basic/message/types"
+import { CidProperty } from "../basic/cid/types"
+import { BlockMessages } from "../basic/block/types"
+import { Tipset } from "../basic/tipset/types"
 import { ReplayStrategy, DefaultReplayStrategy } from "./replayStrategy"
-import { ChainFilecoinRPC } from "../repo/rpc"
+import { ChainFilecoinRPC } from "../chain/repo/rpc"
 
 /**
  * Retrieves block messages for each block in a tipset.
@@ -73,7 +73,7 @@ export async function GetBlockMessagesesByTipset(
  * @param options - Options for replaying messages, including a replay flag and replay strategy.
  * @returns A Promise that resolves to a Result containing the array of replayed messages or an error.
  */
-export async function GetRepalyedMessagesByblockMessageses(
+export async function GetRepalyedMessages(
     rpc: ChainFilecoinRPC,
     messages: Message[],
     tipset: Tipset,

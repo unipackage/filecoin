@@ -33,7 +33,10 @@ import { CidProperty } from "../../../basic/cid/types"
  */
 interface ChainFilecoinOriginRPC {
     ChainHead(): Promise<RPCResponse<Tipset>>
-    ChainGetTipSetByHeight(...params: any[]): Promise<RPCResponse<Tipset>>
+    ChainGetTipSetByHeight(
+        height: number,
+        cids: Array<CidProperty>
+    ): Promise<RPCResponse<Tipset>>
     ChainGetBlockMessages(...params: any[]): Promise<RPCResponse<BlockMessages>>
     StateReplay(...params: any[]): Promise<RPCResponse<Message>>
 }
@@ -53,6 +56,34 @@ class ChainFilecoinOriginRPC extends FilecoinRPCEngine {}
  * Extended class with additional methods and modifications for handling Filecoin chain RPC.
  */
 export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
+    /**
+     * Retrieves chain head tipset
+     * @returns A promise resolving to the RPC response containing tipset.
+     */
+    public async ChainHead(): Promise<RPCResponse<Tipset>> {
+        const res: any = await super.ChainHead()
+        if (res.ok && res.data) {
+            res.data = new Tipset(res.data)
+        }
+        return res
+    }
+
+    /**
+     * Retrieves chain head tipset
+     * @param height- The .height
+     * @returns A promise resolving to the RPC response containing tipset.
+     */
+    public async ChainGetTipSetByHeight(
+        height: number,
+        cids: Array<CidProperty>
+    ): Promise<RPCResponse<Tipset>> {
+        const res: any = await super.ChainGetTipSetByHeight(height, cids)
+        if (res.ok && res.data) {
+            res.data = new Tipset(res.data)
+        }
+        return res
+    }
+
     /**
      * Retrieves block messages for a given tipset and block CID.
      * @param tipset - The tipset.

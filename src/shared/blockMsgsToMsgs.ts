@@ -18,9 +18,9 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { Tipset } from "../../tipset/types"
-import { BlockMessages } from "../../block/types"
-import { BlsMessage, Message } from "../../message/types"
+import { Tipset } from "../basic/tipset/types"
+import { BlockMessages } from "../basic/block/types"
+import { BlsMessage, Message } from "../basic/message/types"
 
 /**
  * Converts an array of BlockMessages to an array of Messages.

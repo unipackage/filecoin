@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { Message } from "../../basic/message/types"
+import { Message } from "../basic/message/types"
 
 /**
  * Interface for defining a replay strategy.
