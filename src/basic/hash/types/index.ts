@@ -21,7 +21,6 @@
 import { Cid } from "../../cid/types"
 import { digest } from "multiformats/basics"
 import { CID } from "multiformats/cid"
-import * as json from "multiformats/codecs/json"
 
 /**
  * Class representing a hash.
@@ -35,8 +34,7 @@ export class Hash {
      */
     constructor(hash: Uint8Array | string) {
         if (typeof hash === "string") {
-            const encoder = new TextEncoder()
-            this.hash = encoder.encode(hash)
+            this.hash = hexToBinaryHash(hash)
         } else {
             this.hash = hash
         }
@@ -46,17 +44,9 @@ export class Hash {
      * Converts the hash to a CID (Content Identifier) using the CID version 0.
      * @returns The CID version 0 representation of the hash.
      */
-    toCidV0(): Cid {
-        return new Cid(CID.createV0(digest.create(18, this.hash)).toString())
-    }
-
-    /**
-     * Converts the hash to a CID (Content Identifier) using the CID version 1.
-     * @returns The CID version 1 representation of the hash.
-     */
-    toCidV1(): Cid {
+    toCid(): Cid {
         return new Cid(
-            CID.createV1(json.code, digest.create(0x55, this.hash)).toString()
+            CID.createV0(digest.create(0x12, this.hash)).toV1().toString()
         )
     }
 
@@ -65,8 +55,7 @@ export class Hash {
      * @returns The string representation of the hash.
      */
     toString(): string {
-        const decoder = new TextDecoder("utf-8")
-        return decoder.decode(this.hash)
+        return binaryHashToHex(this.hash)
     }
 
     /**
@@ -76,4 +65,36 @@ export class Hash {
     toUint8Array(): Uint8Array {
         return this.hash
     }
+}
+
+/**
+ * Converts a binary hash to a hexadecimal string.
+ * @param binaryHash - The binary hash as a Uint8Array.
+ * @returns The hexadecimal string representation of the hash.
+ */
+function binaryHashToHex(binaryHash: Uint8Array): string {
+    const hexArray = Array.from(binaryHash).map((byte) =>
+        byte.toString(16).padStart(2, "0")
+    )
+
+    return "0x" + hexArray.join("")
+}
+
+/**
+ * Converts a hexadecimal string (with or without '0x' prefix) to a binary hash (Uint8Array).
+ * @param hexString - The hexadecimal string.
+ * @returns The binary hash as a Uint8Array.
+ */
+function hexToBinaryHash(hexString: string): Uint8Array {
+    // Remove '0x' prefix if present
+    hexString = hexString.startsWith("0x") ? hexString.slice(2) : hexString
+
+    const length = hexString.length / 2
+    const binaryHash = new Uint8Array(length)
+
+    for (let i = 0; i < length; i++) {
+        binaryHash[i] = parseInt(hexString.substr(i * 2, 2), 16)
+    }
+
+    return binaryHash
 }

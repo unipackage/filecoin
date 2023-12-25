@@ -21,7 +21,7 @@
 import {
     Address as GlifAddress,
     Protocol,
-    CoinType,
+    newFromString,
 } from "@glif/filecoin-address"
 import { Result } from "@unipackage/utils"
 
@@ -29,40 +29,25 @@ import { Result } from "@unipackage/utils"
  * Customized Address class that extends the GlifAddress class.
  */
 export class Address extends GlifAddress {
-    private idAddress: string
+    private idAddress: string | undefined
 
     /**
      * Constructor for the Address class.
-     * @param bytes - The address bytes as a Uint8Array or a string.
-     * @param coinType - The optional coin type.
+     * @param address- The address string.
      */
-    constructor(bytes: Uint8Array | string, coinType?: CoinType) {
-        if (typeof bytes === "string") {
-            // If the input is a string, encode it to bytes using TextEncoder
-            const encoder = new TextEncoder()
-            super(encoder.encode(bytes), coinType)
-        } else {
-            // If the input is already bytes, use it directly
-            super(bytes, coinType)
-        }
+    constructor(address: string) {
+        super(newFromString(address).bytes)
         // Initialize the idAddress property based on the Protocol
-        this.idAddress = super.protocol() === Protocol.ID ? this.toString() : ""
+        this.idAddress =
+            super.protocol() === Protocol.ID ? this.toString() : undefined
     }
 
     /**
      * Gets the ID address if set.
      * @returns A Result containing the ID address if set, or an error message if not set.
      */
-    getIdAddress(): Result<string> {
-        return this.idAddress !== ""
-            ? {
-                  ok: true,
-                  data: this.idAddress,
-              }
-            : {
-                  ok: false,
-                  error: "IdAddress not set",
-              }
+    getIdAddress(): string | undefined {
+        return this.idAddress
     }
 
     /**
@@ -71,7 +56,7 @@ export class Address extends GlifAddress {
      * @returns A Result indicating success or failure, with an optional error message.
      */
     setIdAddress(idAddress: string): Result<void> {
-        if (this.idAddress !== "") {
+        if (!this.idAddress) {
             // If the ID address is not already set, update it
             this.idAddress = idAddress
             return {

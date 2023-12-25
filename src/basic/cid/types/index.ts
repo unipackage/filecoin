@@ -19,6 +19,7 @@
  ********************************************************************************/
 
 import { CID } from "multiformats/cid"
+import { Hash } from "../../hash/types"
 
 /**
  * Wrapper class for CID functionality.
@@ -39,7 +40,7 @@ export class Cid {
      * Gets the hash component of the CID.
      * @returns Uint8Array representing the hash of the CID.
      */
-    toHash(): Uint8Array {
-        return this.CID.multihash.digest
+    toHash(): Hash {
+        return new Hash(this.CID.multihash.digest)
     }
 }
