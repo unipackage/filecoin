@@ -33,9 +33,9 @@ export {
     SecpkMessage,
     GasCost,
 } from "./basic/message/types"
-export { ContractMessageDecoder } from "./basic/contractMessage/decoder"
-export { ContractMessage } from "./basic/contractMessage/types"
 export { MessageDocument, MessageModel } from "./basic/message/model"
+export { ContractMessageDecoder } from "./contractMessage/decoder"
+export { ContractMessage } from "./contractMessage/types"
 export { TipsetDocument, TipsetModel } from "./basic/tipset/model"
 export { Tipset } from "./basic/tipset/types"
 export { Chain } from "./chain/types"
@@ -45,6 +45,7 @@ export {
     TipsetMongoDatastore,
 } from "./chain/repo/datastore"
 export { ChainFilecoinRPC } from "./chain/repo/rpc"
+export { ChainService, ChainServiceOptions } from "./chain/service"
 export { ParticipantFilecoinRPC } from "./miner/repo/rpc"
 export {
     Miner,

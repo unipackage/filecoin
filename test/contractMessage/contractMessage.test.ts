@@ -20,8 +20,7 @@
 
 import { expect } from "chai"
 import "mocha"
-import { ContractMessage } from "../../src/basic/contractMessage/types" // Replace with the actual path to your TypeScript file
-import { Cid } from "../../src/basic/cid/types"
+import { ContractMessage } from "../../src/contractMessage/types" // Replace with the actual path to your TypeScript file
 
 describe("ContractMessage Entity", () => {
     it("should create a valid ContractMessage entity", () => {

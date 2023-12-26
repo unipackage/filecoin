@@ -1,4 +1,24 @@
-import { ContractMessageDecoder } from "../../src/basic/contractMessage/decoder"
+/*******************************************************************************
+ *   (c) 2023 unipackage
+ *
+ *  Licensed under either the MIT License (the "MIT License") or the Apache License, Version 2.0
+ *  (the "Apache License"). You may not use this file except in compliance with one of these
+ *  licenses. You may obtain a copy of the MIT License at
+ *
+ *      https://opensource.org/licenses/MIT
+ *
+ *  Or the Apache License, Version 2.0 at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the MIT License or the Apache License for the specific language governing permissions and
+ *  limitations under the respective licenses.
+ ********************************************************************************/
+
+import { ContractMessageDecoder } from "../../src/contractMessage/decoder"
 import { proofEvm } from "./env"
 import "mocha"
 import { ChainFilecoinRPC } from "../../src/chain/repo/rpc" // Replace with the actual path to your TypeScript file
@@ -13,7 +33,7 @@ import {
 } from "../../src/shared/utils"
 import * as dotenv from "dotenv"
 import assert from "assert"
-import { ContractMessage } from "../../src/basic/contractMessage/types"
+import { ContractMessage } from "../../src/contractMessage/types"
 dotenv.config()
 
 describe("ContractMessageDecoder", () => {

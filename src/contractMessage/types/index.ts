@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { CidProperty } from "../../cid/types"
+import { CidProperty } from "../../basic/cid/types"
 import { Entity } from "@unipackage/ddd"
 
 /**

@@ -20,9 +20,8 @@
 
 import { Result } from "@unipackage/utils"
 import { IEVM } from "@unipackage/net"
-import { Message } from "../../message/types"
+import { Message } from "../../basic/message/types"
 import { ContractMessage } from "../types"
-import { Cid } from "../../cid/types"
 import * as cbor from "cbor"
 
 /**
@@ -77,6 +76,9 @@ export class ContractMessageDecoder {
     }
 }
 
+/**
+ * function that decode the cbor encoded string
+ */
 function decodeParamsToHex(params: string) {
     return "0x" + cbor.decode(Buffer.from(params, "base64")).toString("hex")
 }
