@@ -13,6 +13,8 @@ jobs:
                 node-version: [18.x]
         env:
             LOTUS_API_ENDPOINT: ${{ vars.LOTUS_API_ENDPOINT }}
+            PROOF_CONTRACT_ADDRESS: ${{ vars.PROOF_CONTRACT_ADDRESS }}
+            PROVIDER_URL: ${{ vars.PROVIDER_URL }}
         steps:
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v3

@@ -23,6 +23,7 @@ import { IEVM } from "@unipackage/net"
 import { Message } from "../../message/types"
 import { ContractMessage } from "../types"
 import { Cid } from "../../cid/types"
+import * as cbor from "cbor"
 
 /**
  * ContractMessageDecoder class for decoding contract messages.
@@ -45,28 +46,27 @@ export class ContractMessageDecoder {
      */
     decode(msg: Message): Result<ContractMessage> {
         // Decode the input parameters of the transaction
-        const decodeInputRes = this.evm.decodeTxInputToEvmInput(msg.Msg.Params)
+        const txinput = decodeParamsToHex(msg.Msg.Params)
+        const decodeInputRes = this.evm.decodeTxInputToEvmInput(txinput)
 
         // Check if decoding was successful
         if (!decodeInputRes.ok || !decodeInputRes.data) {
             return { ok: false, error: decodeInputRes.error }
         }
 
-        // Check if MsgRct is present
-        if (!msg.MsgRct) {
-            return { ok: false, error: "Missing MsgRct!" }
-        }
-
         // Create a ContractMessage with decoded information
         const dsmsg: ContractMessage = new ContractMessage({
-            cid: new Cid(msg.MsgCid),
+            cid: msg.MsgCid,
             height: msg.Height,
             timestamp: "", // Add timestamp logic here if available
             from: msg.Msg.From,
             to: msg.Msg.To,
             method: decodeInputRes.data.method,
             params: decodeInputRes.data.params,
-            status: msg.MsgRct.ExitCode,
+            status: msg.MsgRct ? msg.MsgRct.ExitCode : "",
+            return: msg.MsgRct?.Return
+                ? decodeParamsToHex(msg.MsgRct?.Return)
+                : "",
         })
 
         // Return the result with the ContractMessage
@@ -75,4 +75,8 @@ export class ContractMessageDecoder {
             data: dsmsg,
         }
     }
+}
+
+function decodeParamsToHex(params: string) {
+    return "0x" + cbor.decode(Buffer.from(params, "base64")).toString("hex")
 }

@@ -18,7 +18,7 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { Cid } from "../../cid/types"
+import { CidProperty } from "../../cid/types"
 import { Entity } from "@unipackage/ddd"
 
 /**
@@ -26,7 +26,7 @@ import { Entity } from "@unipackage/ddd"
  */
 export interface ContractMessage {
     /** CID (Content Identifier) of the contract message. */
-    cid: Cid
+    cid: CidProperty
     /** Height at which the contract message was included in a block. */
     height: number
     /** Timestamp indicating when the contract message was processed. */
@@ -40,7 +40,9 @@ export interface ContractMessage {
     /** Parameters of the contract message. */
     params: any
     /** Status code indicating the result of the contract message execution. */
-    status: number
+    status?: string | number
+    /** Return indicating the result of the contract message execution. */
+    return?: any
 }
 
 /**

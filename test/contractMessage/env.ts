@@ -18,29 +18,18 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { expect } from "chai"
-import "mocha"
-import { ContractMessage } from "../../src/basic/contractMessage/types" // Replace with the actual path to your TypeScript file
-import { Cid } from "../../src/basic/cid/types"
+import DatasetProofAbi from "../testAbi/DatasetsProof.json"
+import { Evm, EthersEvmEngine } from "@unipackage/net"
+import * as dotenv from "dotenv"
+dotenv.config()
 
-describe("ContractMessage Entity", () => {
-    it("should create a valid ContractMessage entity", () => {
-        const contractMessageData = new ContractMessage({
-            cid: { "/": "" },
-            height: 1,
-            timestamp: "2023-01-01T12:00:00Z",
-            from: "senderAddress",
-            to: "recipientAddress",
-            method: "transfer",
-            params: {
-                /* Add parameter properties */
-            },
-            status: "0",
-            return: 0x0,
-        })
-
-        const contractMessageEntity = new ContractMessage(contractMessageData)
-
-        expect(contractMessageEntity).to.be.an.instanceOf(ContractMessage)
-    })
-})
+/**
+ * Instance of EthersProof initialized with provided configuration.
+ */
+export const proofEvm = new Evm(
+    new EthersEvmEngine(
+        DatasetProofAbi.abi,
+        process.env.PROOF_CONTRACT_ADDRESS as string,
+        process.env.PROVIDER_URL as string
+    )
+)
