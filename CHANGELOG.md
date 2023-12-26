@@ -1,5 +1,19 @@
 
 
+# [1.0.0](https://github.com/unipackage/filecoin/compare/v0.2.0...v1.0.0) (2023-12-26)
+
+
+### Features
+
+* 🎸 -delete  miner feature(havn't debug and test) ([e9ce1af](https://github.com/unipackage/filecoin/commit/e9ce1afaf9414a9ba5f1adb345365b43007c1663))
+* 🎸 recover add function:cid and hash ([61ef774](https://github.com/unipackage/filecoin/commit/61ef774e22f5962d9860656ffbc9a6fe2200b2ca))
+* 🎸 remove ICidUtils,and change ContractMessage to Entity ([7f92ffe](https://github.com/unipackage/filecoin/commit/7f92ffe0b2091a2cebcb068e4afd3bf9cf03e53a))
+
+
+### BREAKING CHANGES
+
+* 🧨 delete  miner feature(havn't debug and test)
+
 # [0.2.0](https://github.com/unipackage/filecoin/compare/v0.1.16...v0.2.0) (2023-12-14)
 
 
