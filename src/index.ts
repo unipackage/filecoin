@@ -46,11 +46,11 @@ export {
 } from "./chain/repo/datastore"
 export { ChainFilecoinRPC } from "./chain/repo/rpc"
 export { ChainService, ChainServiceOptions } from "./chain/service"
-export { ParticipantFilecoinRPC } from "./miner/repo/rpc"
-export {
-    Miner,
-    MinerBalance,
-    MinerInfo,
-    MinerPower,
-    Power,
-} from "./miner/types"
+// export { ParticipantFilecoinRPC } from "./miner/repo/rpc"
+// export {
+//     Miner,
+//     MinerBalance,
+//     MinerInfo,
+//     MinerPower,
+//     Power,
+// } from "./miner/types"
