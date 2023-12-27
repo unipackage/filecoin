@@ -1,5 +1,12 @@
 
 
+# [1.1.0](https://github.com/unipackage/filecoin/compare/v1.0.0...v1.1.0) (2023-12-27)
+
+
+### Features
+
+* 🎸 export Strategy ([92ef05c](https://github.com/unipackage/filecoin/commit/92ef05c43710136db59240ae2239f6e103685f27))
+
 # [1.0.0](https://github.com/unipackage/filecoin/compare/v0.2.0...v1.0.0) (2023-12-26)
 
 
