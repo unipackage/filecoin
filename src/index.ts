@@ -46,6 +46,13 @@ export {
 } from "./chain/repo/datastore"
 export { ChainFilecoinRPC } from "./chain/repo/rpc"
 export { ChainService, ChainServiceOptions } from "./chain/service"
+export {
+    ReplayStrategy,
+    ReplayStrategyOptions,
+    DefaultReplayStrategy,
+    AddressesFilterReplayStrategy,
+    AllReplayStrategy,
+} from "./shared/replayStrategy"
 // export { ParticipantFilecoinRPC } from "./miner/repo/rpc"
 // export {
 //     Miner,
