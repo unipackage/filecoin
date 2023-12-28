@@ -1,5 +1,12 @@
 
 
+# [1.5.0](https://github.com/unipackage/filecoin/compare/v1.4.0...v1.5.0) (2023-12-28)
+
+
+### Features
+
+* 🎸 update version(depends: net,ddd,datastore) ([93182fd](https://github.com/unipackage/filecoin/commit/93182fdeb0adf0681f89b7bae0ead0015a14a084))
+
 # [1.4.0](https://github.com/unipackage/filecoin/compare/v1.3.0...v1.4.0) (2023-12-28)
 
 
