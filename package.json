@@ -60,7 +60,7 @@
     "@types/cbor": "^6.0.0",
     "@unipackage/datastore": "^0.2.0",
     "@unipackage/ddd": "^1.1.0",
-    "@unipackage/net": "^2.5.0",
+    "@unipackage/net": "^2.5.1",
     "cbor": "^9.0.1",
     "mongoose": "^7.6.3"
   },
