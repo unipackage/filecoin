@@ -1,5 +1,12 @@
 
 
+# [1.3.0](https://github.com/unipackage/filecoin/compare/v1.2.0...v1.3.0) (2023-12-28)
+
+
+### Features
+
+* 🎸 update net to 2.4.0 ([46ee061](https://github.com/unipackage/filecoin/commit/46ee0611b268ce7253db0d62e099192274e57f7e))
+
 # [1.2.0](https://github.com/unipackage/filecoin/compare/v1.1.0...v1.2.0) (2023-12-28)
 
 
