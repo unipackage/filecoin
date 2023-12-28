@@ -87,7 +87,9 @@ describe("ContractMessageDecoder", () => {
                     from: "f410fhuebctou6znv3xghmceeesoz2gxegxpoopw46jq",
                     to: "f410few7qcnlenzfodimzo72ki7kmh5zlg6munfg5l4q",
                     method: "appendDatasetCollateral",
-                    params: [BigInt(1)],
+                    params: {
+                        datasetId: BigInt(1),
+                    },
                     status: 0,
                     return: "0x",
                 }),
