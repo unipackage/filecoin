@@ -1,5 +1,12 @@
 
 
+# [1.2.0](https://github.com/unipackage/filecoin/compare/v1.1.0...v1.2.0) (2023-12-28)
+
+
+### Features
+
+* 🎸 export utils function ([a723155](https://github.com/unipackage/filecoin/commit/a723155d4dda51c3620374b26a056c4c43a33b5f))
+
 # [1.1.0](https://github.com/unipackage/filecoin/compare/v1.0.0...v1.1.0) (2023-12-27)
 
 
