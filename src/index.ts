@@ -53,6 +53,8 @@ export {
     AddressesFilterReplayStrategy,
     AllReplayStrategy,
 } from "./shared/replayStrategy"
+export { BlockMessagesToMessages } from "./shared/blockMsgsToMsgs"
+export { GetBlockMessagesesByTipset, GetRepalyedMessages } from "./shared/utils"
 // export { ParticipantFilecoinRPC } from "./miner/repo/rpc"
 // export {
 //     Miner,
