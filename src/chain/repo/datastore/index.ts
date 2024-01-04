@@ -18,7 +18,11 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { DataStore, DatabaseOptions } from "@unipackage/datastore"
+import {
+    DataStore,
+    DatabaseConnection,
+    DatabaseConnectionOptions,
+} from "@unipackage/datastore"
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
@@ -38,12 +42,11 @@ export class MessageMongoDatastore extends DataStore<
     ValueFields<Message>,
     MessageDocument
 > {
-    constructor(uri: string, options?: DatabaseOptions) {
+    constructor(connection: DatabaseConnection) {
         super(
             new MongooseDataStore<ValueFields<Message>, MessageDocument>(
                 MessageModel,
-                uri,
-                options
+                connection
             )
         )
     }
@@ -67,12 +70,12 @@ export class BlockMongoDatastore extends DataStore<
     ValueFields<BlockMessages>,
     BlockMessagesDocument
 > {
-    constructor(uri: string, options?: DatabaseOptions) {
+    constructor(connection: DatabaseConnection) {
         super(
             new MongooseDataStore<
                 ValueFields<BlockMessages>,
                 BlockMessagesDocument
-            >(BlockMessagesModel, uri, options)
+            >(BlockMessagesModel, connection)
         )
     }
 
@@ -94,12 +97,11 @@ export class TipsetMongoDatastore extends DataStore<
     ValueFields<Tipset>,
     TipsetDocument
 > {
-    constructor(uri: string, options?: DatabaseOptions) {
+    constructor(connection: DatabaseConnection) {
         super(
             new MongooseDataStore<ValueFields<Tipset>, TipsetDocument>(
                 TipsetModel,
-                uri,
-                options
+                connection
             )
         )
     }

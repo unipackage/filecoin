@@ -18,7 +18,12 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
-import { messageDs, blockDs, tipsetDs } from "../../helper/mongodb/instance"
+import {
+    messageDs,
+    blockDs,
+    tipsetDs,
+    connection_noAuth,
+} from "../../helper/mongodb/instance"
 import "mocha"
 import { ChainFilecoinRPC } from "../../../src/chain/repo/rpc" // Replace with the actual path to your TypeScript file
 import { ChainService } from "../../../src/chain/service" // Replace with the actual path to your TypeScript file
@@ -42,15 +47,11 @@ describe("ChainService", () => {
     })
 
     beforeEach(async () => {
-        await tipsetDs.connect()
-        await blockDs.connect()
-        await messageDs.connect()
+        await connection_noAuth.connect()
     })
 
     afterEach(async () => {
-        await tipsetDs.disconnect()
-        await blockDs.disconnect()
-        await messageDs.disconnect()
+        await connection_noAuth.disconnect()
     })
 
     describe("GetAndSaveChainInfoByHeight", () => {

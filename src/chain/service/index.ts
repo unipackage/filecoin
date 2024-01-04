@@ -157,14 +157,6 @@ export class ChainService implements ChainService {
             error: undefined,
         }
         try {
-            // Connect to data stores.
-            const msgConnect = await this.messageDs.connect()
-            if (!msgConnect.ok) return { ok: false, error: msgConnect.error }
-            const bmConnect = await this.blockMessagesDs.connect()
-            if (!bmConnect.ok) return { ok: false, error: bmConnect.error }
-            const tsConnect = await this.tipsetDs.connect()
-            if (!tsConnect.ok) return { ok: false, error: tsConnect.error }
-
             // Save messages to the data store.
             const msgDoResults = await Promise.all(
                 chain.messages.map(
@@ -206,12 +198,6 @@ export class ChainService implements ChainService {
             result.error = error
             return result
         } finally {
-            // Disconnect from data stores.
-            /* 
-            await this.tipsetDs.disconnect();
-            await this.blockMessagesDs.disconnect();
-            await this.messageDs.disconnect();
-            */
         }
 
         return result

@@ -18,23 +18,21 @@
  *  limitations under the respective licenses.
  ********************************************************************************/
 
+import { DatabaseConnection } from "@unipackage/datastore"
 import {
     MessageMongoDatastore,
     BlockMongoDatastore,
     TipsetMongoDatastore,
 } from "../../../../src/chain/repo/datastore"
 
-export const messageDs = new MessageMongoDatastore(
+export const connection_noAuth = DatabaseConnection.getInstance(
     "mongodb://127.0.0.1:27017/datastore"
 )
-export const blockDs = new BlockMongoDatastore(
-    "mongodb://127.0.0.1:27017/datastore"
-)
-export const tipsetDs = new TipsetMongoDatastore(
-    "mongodb://127.0.0.1:27017/datastore"
-)
+export const messageDs = new MessageMongoDatastore(connection_noAuth)
+export const blockDs = new BlockMongoDatastore(connection_noAuth)
+export const tipsetDs = new TipsetMongoDatastore(connection_noAuth)
 
-export const messageAuthDs = new MessageMongoDatastore(
+export const connection_auth = DatabaseConnection.getInstance(
     "mongodb://127.0.0.1:27018/datastoreAuth",
     {
         user: "admin",
@@ -46,3 +44,4 @@ export const messageAuthDs = new MessageMongoDatastore(
         tlsAllowInvalidHostnames: true,
     }
 )
+export const messageAuthDs = new MessageMongoDatastore(connection_auth)
