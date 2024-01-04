@@ -1,5 +1,12 @@
 
 
+# [1.6.0](https://github.com/unipackage/filecoin/compare/v1.5.1...v1.6.0) (2024-01-04)
+
+
+### Features
+
+* 🎸 datastore -> 0.3.0 ([46175bd](https://github.com/unipackage/filecoin/commit/46175bd6f4b35c2d2c184b116d068fc646bc4b1c))
+
 ## [1.5.1](https://github.com/unipackage/filecoin/compare/v1.5.0...v1.5.1) (2023-12-28)
 
 
