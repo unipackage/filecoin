@@ -50,11 +50,6 @@ const BlockMessagesSchema = new Schema<BlockMessagesDocument>({
     },
 })
 
-// Create or reuse the Mongoose model for BlockMessages
-const BlockMessagesModel =
-    mongoose.models.BlockMessages ||
-    mongoose.model<BlockMessagesDocument>("BlockMessages", BlockMessagesSchema)
-
 // Export the Mongoose model and document interface
-export { BlockMessagesModel }
+export { BlockMessagesSchema }
 export type { BlockMessagesDocument }

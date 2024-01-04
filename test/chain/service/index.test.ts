@@ -46,14 +46,6 @@ describe("ChainService", () => {
         tipsetDs,
     })
 
-    beforeEach(async () => {
-        await connection_noAuth.connect()
-    })
-
-    afterEach(async () => {
-        await connection_noAuth.disconnect()
-    })
-
     describe("GetAndSaveChainInfoByHeight", () => {
         it("should ok", async function (this: Context) {
             this.timeout(10000)

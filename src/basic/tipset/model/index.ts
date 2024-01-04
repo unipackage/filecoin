@@ -42,10 +42,5 @@ const TipsetSchema = new Schema<TipsetDocument>({
     },
 })
 
-// TipsetModel representing the Mongoose model for Tipset
-const TipsetModel =
-    mongoose.models.Tipset ||
-    mongoose.model<TipsetDocument>("Tipset", TipsetSchema)
-
-export { TipsetModel }
+export { TipsetSchema }
 export type { TipsetDocument }

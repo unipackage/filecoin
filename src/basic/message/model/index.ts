@@ -54,11 +54,6 @@ const MessageSchema = new Schema<MessageDocument>({
     GasCost: Object,
 })
 
-// Define the Message model using the Message schema
-const MessageModel =
-    mongoose.models.Message ||
-    mongoose.model<MessageDocument>("Message", MessageSchema)
-
 // Export the Message model and document interface
-export { MessageModel }
+export { MessageSchema }
 export type { MessageDocument }

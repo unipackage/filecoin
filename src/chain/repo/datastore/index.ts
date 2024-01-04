@@ -26,12 +26,12 @@ import {
 import { Message } from "../../../basic/message/types"
 import { BlockMessages } from "../../../basic/block/types"
 import { Tipset } from "../../../basic/tipset/types"
-import { MessageModel, MessageDocument } from "../../../basic/message/model"
+import { MessageSchema, MessageDocument } from "../../../basic/message/model"
 import {
     BlockMessagesDocument,
-    BlockMessagesModel,
+    BlockMessagesSchema,
 } from "../../../basic/block/model"
-import { TipsetDocument, TipsetModel } from "../../../basic/tipset/model"
+import { TipsetDocument, TipsetSchema } from "../../../basic/tipset/model"
 import { MongooseDataStore } from "@unipackage/datastore"
 import { ValueFields } from "@unipackage/utils"
 
@@ -45,7 +45,8 @@ export class MessageMongoDatastore extends DataStore<
     constructor(connection: DatabaseConnection) {
         super(
             new MongooseDataStore<ValueFields<Message>, MessageDocument>(
-                MessageModel,
+                "Message",
+                MessageSchema,
                 connection
             )
         )
@@ -75,7 +76,7 @@ export class BlockMongoDatastore extends DataStore<
             new MongooseDataStore<
                 ValueFields<BlockMessages>,
                 BlockMessagesDocument
-            >(BlockMessagesModel, connection)
+            >("BlockMessages", BlockMessagesSchema, connection)
         )
     }
 
@@ -100,7 +101,8 @@ export class TipsetMongoDatastore extends DataStore<
     constructor(connection: DatabaseConnection) {
         super(
             new MongooseDataStore<ValueFields<Tipset>, TipsetDocument>(
-                TipsetModel,
+                "Tipset",
+                TipsetSchema,
                 connection
             )
         )

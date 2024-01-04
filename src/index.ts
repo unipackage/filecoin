@@ -23,7 +23,7 @@ export { Actor } from "./basic/actor/types"
 export { Address } from "./basic/address/types"
 export { Balance, MarketBalance } from "./basic/balance/types"
 export { Block, BlockMessages } from "./basic/block/types"
-export { BlockMessagesDocument, BlockMessagesModel } from "./basic/block/model"
+export { BlockMessagesDocument, BlockMessagesSchema } from "./basic/block/model"
 export { Cid } from "./basic/cid/types"
 export { Hash } from "./basic/hash/types"
 export {
@@ -33,10 +33,10 @@ export {
     SecpkMessage,
     GasCost,
 } from "./basic/message/types"
-export { MessageDocument, MessageModel } from "./basic/message/model"
+export { MessageDocument, MessageSchema } from "./basic/message/model"
 export { ContractMessageDecoder } from "./contractMessage/decoder"
 export { ContractMessage } from "./contractMessage/types"
-export { TipsetDocument, TipsetModel } from "./basic/tipset/model"
+export { TipsetDocument, TipsetSchema } from "./basic/tipset/model"
 export { Tipset } from "./basic/tipset/types"
 export { Chain } from "./chain/types"
 export {
