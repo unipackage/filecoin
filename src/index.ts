@@ -24,7 +24,7 @@ export { Address } from "./basic/address/types"
 export { Balance, MarketBalance } from "./basic/balance/types"
 export { Block, BlockMessages } from "./basic/block/types"
 export { BlockMessagesDocument, BlockMessagesSchema } from "./basic/block/model"
-export { Cid } from "./basic/cid/types"
+export { Cid, CidProperty } from "./basic/cid/types"
 export { Hash } from "./basic/hash/types"
 export {
     Message,
