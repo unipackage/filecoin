@@ -1,5 +1,12 @@
 
 
+## [2.1.2](https://github.com/unipackage/filecoin/compare/v2.1.1...v2.1.2) (2024-01-06)
+
+
+### Bug Fixes
+
+* 🐛 export cidproperty ([c58028d](https://github.com/unipackage/filecoin/commit/c58028dc0c767609e8ff2363a0accfaca7fde57c))
+
 ## [2.1.1](https://github.com/unipackage/filecoin/compare/v2.1.0...v2.1.1) (2024-01-05)
 
 
