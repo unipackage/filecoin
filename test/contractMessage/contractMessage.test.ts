@@ -30,6 +30,7 @@ describe("ContractMessage Entity", () => {
             timestamp: "2023-01-01T12:00:00Z",
             from: "senderAddress",
             to: "recipientAddress",
+            value: "1000000000",
             method: "transfer",
             params: {
                 /* Add parameter properties */
