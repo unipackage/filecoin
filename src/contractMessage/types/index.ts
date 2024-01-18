@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import { CidProperty } from "../../basic/cid/types"
-import { Entity } from "@unipackage/ddd"
+import { ValueFields } from "@unipackage/utils"
 
 /**
  * Interface representing a ContractMessage.
@@ -35,6 +35,8 @@ export interface ContractMessage {
     from: string
     /** Recipient's address to which the contract message is directed. */
     to: string
+    /** The amount sent by the contract message. */
+    value: string
     /** Method associated with the contract message. */
     method: string
     /** Parameters of the contract message. */
@@ -48,4 +50,26 @@ export interface ContractMessage {
 /**
  * class representing a ContractMessage.
  */
-export class ContractMessage extends Entity<ContractMessage> {}
+export class ContractMessage {
+    /**
+     * Creates an instance of the ContractMessage.
+     * @param data - The initial data for the ContractMessage.
+     */
+    constructor(data: ValueFields<ContractMessage>) {
+        if (!data) {
+            throw new Error("Invalid data provided to the constructor")
+        }
+        Object.assign(this, data)
+    }
+
+    /**
+     * Gets the values of the ContractMessage.
+     * @returns ValueFields<ContractMessage>.
+     */
+    values(): ValueFields<ContractMessage> {
+        return Object.fromEntries(
+            Object.entries(this)
+                .filter(([key, value]) => this.hasOwnProperty(key) && typeof value !== "function")
+        ) as ValueFields<ContractMessage>;
+    }
+}

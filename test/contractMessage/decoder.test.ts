@@ -86,6 +86,7 @@ describe("ContractMessageDecoder", () => {
                     timestamp: "",
                     from: "f410fhuebctou6znv3xghmceeesoz2gxegxpoopw46jq",
                     to: "f410few7qcnlenzfodimzo72ki7kmh5zlg6munfg5l4q",
+                    value: "1000000000",
                     method: "appendDatasetCollateral",
                     params: {
                         datasetId: BigInt(1),

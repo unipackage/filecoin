@@ -60,6 +60,7 @@ export class ContractMessageDecoder {
             timestamp: "", // Add timestamp logic here if available
             from: msg.Msg.From,
             to: msg.Msg.To,
+            value: msg.Msg.Value,
             method: decodeInputRes.data.method,
             params: decodeInputRes.data.params,
             status: msg.MsgRct ? msg.MsgRct.ExitCode : "",
