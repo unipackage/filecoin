@@ -1,5 +1,12 @@
 
 
+# [2.2.0](https://github.com/unipackage/filecoin/compare/v2.1.3...v2.2.0) (2024-01-18)
+
+
+### Features
+
+* 🎸 Add value parameter to ContractMessage ([93083b7](https://github.com/unipackage/filecoin/commit/93083b77c9b309190d0758583f85f70166f9f043)), closes [#7](https://github.com/unipackage/filecoin/issues/7)
+
 ## [2.1.3](https://github.com/unipackage/filecoin/compare/v2.1.2...v2.1.3) (2024-01-17)
 
 
