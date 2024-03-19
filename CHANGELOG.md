@@ -1,5 +1,12 @@
 
 
+## [2.2.1](https://github.com/unipackage/filecoin/compare/v2.2.0...v2.2.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* 🐛 update net version to 2.5.4 ([e801f08](https://github.com/unipackage/filecoin/commit/e801f081ca3efadd6ccbcd4ff73b0c19f4940b72))
+
 # [2.2.0](https://github.com/unipackage/filecoin/compare/v2.1.3...v2.2.0) (2024-01-18)
 
 

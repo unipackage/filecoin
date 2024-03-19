@@ -1,6 +1,6 @@
 {
   "name": "@unipackage/filecoin",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "filecoin",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
