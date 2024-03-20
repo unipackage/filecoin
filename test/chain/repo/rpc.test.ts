@@ -26,6 +26,7 @@ import { expect } from "chai"
 import { Tipset } from "../../../src/basic/tipset/types"
 import { Message } from "../../../src/basic/message/types"
 import { BlockMessages } from "../../../src/basic/block/types"
+import { Cid, CidProperty } from "../../../src/basic/cid/types"
 dotenv.config()
 
 describe("RPC", () => {
@@ -89,6 +90,18 @@ describe("RPC", () => {
                 expect(res.data?.GasCost).to.be.not.undefined
                 expect(res.data).to.be.instanceOf(Message)
             }
+        })
+    })
+    describe.skip("EthGetTransactionHashByCid", () => {
+        it("should ok", async function (this: Context) {
+            this.timeout(10000)
+            const res = await rpc.EthGetTransactionHashByCid({
+                "/": "bafy2bzacebwksgenvlvw2bwylwmrnprvqenlmdzpylb63iso6jsygi2sbxolg",
+            } as CidProperty)
+            expect(res.ok).to.be.equal(true)
+            expect(res.data).to.be.equal(
+                "0xc24902d9e3f96872d70b551ff73b8fa22b5e59e922eaf944b64f6cab8a388bf1"
+            )
         })
     })
 })
