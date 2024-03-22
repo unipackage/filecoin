@@ -39,6 +39,7 @@ interface ChainFilecoinOriginRPC {
     ): Promise<RPCResponse<Tipset>>
     ChainGetBlockMessages(...params: any[]): Promise<RPCResponse<BlockMessages>>
     StateReplay(...params: any[]): Promise<RPCResponse<Message>>
+    EthGetTransactionHashByCid(cid: CidProperty): Promise<RPCResponse<string>>
 }
 
 /**
@@ -49,6 +50,7 @@ interface ChainFilecoinOriginRPC {
     "ChainGetTipSetByHeight",
     "ChainGetBlockMessages",
     "StateReplay",
+    "EthGetTransactionHashByCid",
 ])
 class ChainFilecoinOriginRPC extends FilecoinRPCEngine {}
 
@@ -128,6 +130,21 @@ export class ChainFilecoinRPC extends ChainFilecoinOriginRPC {
                 MsgRct,
                 GasCost,
             })
+        }
+        return res
+    }
+
+    /**
+     * Retrieves the Ethereum transaction hash by CID (Content Identifier).
+     * @param cid The CID (Content Identifier) property.
+     * @returns {Promise<RPCResponse<string>>} A Promise resolving to RPCResponse containing the Ethereum transaction hash.
+     */
+    public async EthGetTransactionHashByCid(
+        cid: CidProperty
+    ): Promise<RPCResponse<string>> {
+        const res: any = await super.EthGetTransactionHashByCid(cid)
+        if (res.ok && res.data) {
+            res.data = String(res.data)
         }
         return res
     }
