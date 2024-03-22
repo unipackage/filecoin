@@ -1,5 +1,12 @@
 
 
+# [2.3.0](https://github.com/unipackage/filecoin/compare/v2.2.1...v2.3.0) (2024-03-22)
+
+
+### Features
+
+* 🎸 add EthGetTransactionHashByCid to ChainFilecoinRPC ([c0472c8](https://github.com/unipackage/filecoin/commit/c0472c8f4250ccbdd91c79f423d0ea4f6ae0fc93)), closes [#10](https://github.com/unipackage/filecoin/issues/10)
+
 ## [2.2.1](https://github.com/unipackage/filecoin/compare/v2.2.0...v2.2.1) (2024-03-19)
 
 
